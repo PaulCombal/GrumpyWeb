@@ -1,3 +1,11 @@
 ex_grumpy_homepage:
     path:     /
     defaults: { _controller: EXGrumpyBundle:Default:index }
+
+ex_grumpy_add:
+    path:     /add_event
+    defaults: { _controller: EXGrumpyBundle:Default:add_event }
+
+ex_grumpy_view:
+    path:     /view_event
+    defaults: { _controller: EXGrumpyBundle:Default:view_event }
