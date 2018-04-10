@@ -1,0 +1,3 @@
+ex_grumpy_homepage:
+    path:     /
+    defaults: { _controller: EXGrumpyBundle:Default:index }

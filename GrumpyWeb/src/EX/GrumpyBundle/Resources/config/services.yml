@@ -1,0 +1,4 @@
+services:
+#    ex_grumpy.example:
+#        class: EX\GrumpyBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
