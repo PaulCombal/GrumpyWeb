@@ -2,15 +2,16 @@
 
 namespace EX\GrumpyBundle\Entity;
 
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Utilisateur
  *
- * @ORM\Table(name="utilisateur")
+ * @ORM\Table(name="utilisateur", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_1D1C63B392FC23A8", columns={"username_canonical"}), @ORM\UniqueConstraint(name="UNIQ_1D1C63B3A0D96FBF", columns={"email_canonical"}), @ORM\UniqueConstraint(name="UNIQ_1D1C63B3C05FB297", columns={"confirmation_token"})})
  * @ORM\Entity
  */
-class Utilisateur
+class Utilisateur extends BaseUser
 {
     /**
      * @var integer
@@ -19,49 +20,7 @@ class Utilisateur
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nom", type="string", length=25, nullable=true)
-     */
-    private $nom;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="prenom", type="string", length=25, nullable=true)
-     */
-    private $prenom;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="mdp", type="string", length=25, nullable=true)
-     */
-    private $mdp;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="login", type="string", length=25, nullable=true)
-     */
-    private $login;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=25, nullable=true)
-     */
-    private $email;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="role", type="string", length=25, nullable=true)
-     */
-    private $role;
+    protected $id;
 
 
 }
