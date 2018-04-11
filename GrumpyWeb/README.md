@@ -15,3 +15,7 @@ A Symfony project created on April 10, 2018, 8:22 am.
         2. Browse to the http://localhost:8000 URL.
 
     * Read the documentation at https://symfony.com/doc
+
+For import database to entity
+
+php bin/console doctrine:mapping:import --force EXGrumpyBundle annotation

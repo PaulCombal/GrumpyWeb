@@ -4,7 +4,7 @@ namespace EX\GrumpyBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class DefaultController extends Controller
+class ForumController extends Controller
 {
  public function indexAction()
   {
@@ -30,7 +30,7 @@ class DefaultController extends Controller
         'date'    => new \Datetime())
     );
     // Mais pour l'instant, on ne fait qu'appeler le template
-    return $this->render("@EXGrumpy/Advert/index.html.twig", array(
+    return $this->render("@EXGrumpy/Forum/index.html.twig", array(
       'listAdverts' => $listAdverts
     ));
   }
@@ -45,7 +45,7 @@ class DefaultController extends Controller
       array('id' => 9, 'title' => 'Offre de stage webdesigner')
     );
 
-    return $this->render("@EXGrumpy/Advert/menu.html.twig", array(
+    return $this->render("@EXGrumpy/Forum/menu.html.twig", array(
       // Tout l'intérêt est ici : le contrôleur passe
       // les variables nécessaires au template !
       'listAdverts' => $listAdverts

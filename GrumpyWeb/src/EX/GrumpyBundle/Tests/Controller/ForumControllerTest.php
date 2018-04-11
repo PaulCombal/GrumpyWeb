@@ -4,7 +4,7 @@ namespace EX\GrumpyBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class DefaultControllerTest extends WebTestCase
+class ForumControllerTest extends WebTestCase
 {
     public function testIndex()
     {
