@@ -36,6 +36,13 @@ monolog:
         #chromephp:
         #    type: chromephp
         #    level: info
+        
+bazinga_faker:
+    orm: doctrine
+    locale: fr_FR
+    entities:
+        EX\GrumpyBundle\Entity\User:
+            number: 20
 
 #swiftmailer:
 #    delivery_addresses: ['me@example.com']
