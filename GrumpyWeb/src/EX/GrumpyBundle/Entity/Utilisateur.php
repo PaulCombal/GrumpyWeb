@@ -23,13 +23,13 @@ class Utilisateur extends BaseUser
     protected $id;
 
     /**
-     * @ORM\Column(name="prenom_utilisateur", type="string", length=255)
+     * @ORM\Column(name="first_name", type="string", length=255)
      */
     protected $first_name;
 
 
     /**
-     * @ORM\Column(name="nom_utilisateur", type="string", length=255)
+     * @ORM\Column(name="last_name", type="string", length=255)
      */
     protected $last_name;
 

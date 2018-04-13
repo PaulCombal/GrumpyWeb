@@ -9,7 +9,7 @@ parameters:
     locale: fr
 
 fos_user:
-    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    db_driver: orm
     firewall_name: main
     user_class: EX\GrumpyBundle\Entity\Utilisateur
     group:
@@ -19,6 +19,9 @@ fos_user:
     from_email:
         address: "%mailer_user%"
         sender_name: "%mailer_user%"
+    registration:
+        form:
+            type: EX\GrumpyBundle\Form\RegistrationType
 
 framework:
     #esi: ~
@@ -48,7 +51,7 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     form_themes:
-        - LexikFormFilterBundle:Form:form_div_layout.html.twig
+        - '@LexikFormFilter/Form/form_div_layout.html.twig'
 
 knp_paginator:
     page_range: 5                      # default page range used in pagination control
