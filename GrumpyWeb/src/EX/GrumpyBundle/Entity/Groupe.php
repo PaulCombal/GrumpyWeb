@@ -18,4 +18,3 @@ class Groupe extends BaseGroup
      */
      protected $id;
 }
-

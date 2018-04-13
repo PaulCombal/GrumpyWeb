@@ -56,5 +56,110 @@ class Commentaire
     private $idUtilisateur;
 
 
-}
 
+    /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set contenu.
+     *
+     * @param string|null $contenu
+     *
+     * @return Commentaire
+     */
+    public function setContenu($contenu = null)
+    {
+        $this->contenu = $contenu;
+
+        return $this;
+    }
+
+    /**
+     * Get contenu.
+     *
+     * @return string|null
+     */
+    public function getContenu()
+    {
+        return $this->contenu;
+    }
+
+    /**
+     * Set typeContenu.
+     *
+     * @param string|null $typeContenu
+     *
+     * @return Commentaire
+     */
+    public function setTypeContenu($typeContenu = null)
+    {
+        $this->typeContenu = $typeContenu;
+
+        return $this;
+    }
+
+    /**
+     * Get typeContenu.
+     *
+     * @return string|null
+     */
+    public function getTypeContenu()
+    {
+        return $this->typeContenu;
+    }
+
+    /**
+     * Set idEvenement.
+     *
+     * @param \EX\GrumpyBundle\Entity\Evenement|null $idEvenement
+     *
+     * @return Commentaire
+     */
+    public function setIdEvenement(\EX\GrumpyBundle\Entity\Evenement $idEvenement = null)
+    {
+        $this->idEvenement = $idEvenement;
+
+        return $this;
+    }
+
+    /**
+     * Get idEvenement.
+     *
+     * @return \EX\GrumpyBundle\Entity\Evenement|null
+     */
+    public function getIdEvenement()
+    {
+        return $this->idEvenement;
+    }
+
+    /**
+     * Set idUtilisateur.
+     *
+     * @param \EX\GrumpyBundle\Entity\Utilisateur|null $idUtilisateur
+     *
+     * @return Commentaire
+     */
+    public function setIdUtilisateur(\EX\GrumpyBundle\Entity\Utilisateur $idUtilisateur = null)
+    {
+        $this->idUtilisateur = $idUtilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get idUtilisateur.
+     *
+     * @return \EX\GrumpyBundle\Entity\Utilisateur|null
+     */
+    public function getIdUtilisateur()
+    {
+        return $this->idUtilisateur;
+    }
+}

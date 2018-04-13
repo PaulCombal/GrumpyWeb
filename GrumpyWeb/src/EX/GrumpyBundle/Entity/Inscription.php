@@ -42,5 +42,62 @@ class Inscription
     private $idUtilisateur;
 
 
-}
 
+    /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set idEvenement.
+     *
+     * @param \EX\GrumpyBundle\Entity\Evenement|null $idEvenement
+     *
+     * @return Inscription
+     */
+    public function setIdEvenement(\EX\GrumpyBundle\Entity\Evenement $idEvenement = null)
+    {
+        $this->idEvenement = $idEvenement;
+
+        return $this;
+    }
+
+    /**
+     * Get idEvenement.
+     *
+     * @return \EX\GrumpyBundle\Entity\Evenement|null
+     */
+    public function getIdEvenement()
+    {
+        return $this->idEvenement;
+    }
+
+    /**
+     * Set idUtilisateur.
+     *
+     * @param \EX\GrumpyBundle\Entity\Utilisateur|null $idUtilisateur
+     *
+     * @return Inscription
+     */
+    public function setIdUtilisateur(\EX\GrumpyBundle\Entity\Utilisateur $idUtilisateur = null)
+    {
+        $this->idUtilisateur = $idUtilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get idUtilisateur.
+     *
+     * @return \EX\GrumpyBundle\Entity\Utilisateur|null
+     */
+    public function getIdUtilisateur()
+    {
+        return $this->idUtilisateur;
+    }
+}
