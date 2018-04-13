@@ -51,7 +51,7 @@ class Utilisateur extends BaseUser
      *
      * @return Utilisateur
      */
-    public function setFirstName(\varchar $firstName)
+    public function setFirstName($firstName)
     {
         $this->first_name = $firstName;
 
@@ -75,7 +75,7 @@ class Utilisateur extends BaseUser
      *
      * @return Utilisateur
      */
-    public function setLastName(\varchar $lastName)
+    public function setLastName($lastName)
     {
         $this->last_name = $lastName;
 

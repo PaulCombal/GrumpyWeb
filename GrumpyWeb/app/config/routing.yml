@@ -29,3 +29,7 @@ fos_user_change_password:
 fos_user_group:
     resource: "@FOSUserBundle/Resources/config/routing/group.xml"
     prefix: /group
+
+ex_grumpy_groups: 
+    resource: "@EXGrumpyBundle/Controller/" 
+    type:     annotation
