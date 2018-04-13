@@ -3,6 +3,15 @@
 namespace EX\GrumpyBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Request;
+use EX\GrumpyBundle\Entity\Evenement;
+use EX\GrumpyBundle\Form\EvenementType;
+use Symfony\Component\Security\Http\Firewall\ContextListener;
+
 
 class ForumController extends Controller
 {
@@ -51,4 +60,34 @@ class ForumController extends Controller
       'listAdverts' => $listAdverts
     ));
     }
+
+    public function add_eventAction(Request $request)
+    {
+      $user = $this->getUser();
+      $evenement = new Evenement();
+      $evenement->setStatut("idée");
+      $evenement->setIdUtilisateur($user->getid());
+      $form = $this->createForm(EvenementType::class, $evenement);
+
+
+      $form->handleRequest($request);
+
+      if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($evenement);
+            $entityManager->flush();
+
+            // ... do any other work - like sending them an email, etc
+            // maybe set a "flash" success message for the user
+
+            return $this->redirectToRoute('ex_grumpy_add_event');
+        }
+
+        return $this->render(
+            '@EXGrumpy/Forum/add_event.html.twig',
+            array('form' => $form->createView())
+        );
+    }
+
 }
