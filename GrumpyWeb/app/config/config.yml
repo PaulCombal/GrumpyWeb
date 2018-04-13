@@ -23,6 +23,10 @@ fos_user:
         form:
             type: EX\GrumpyBundle\Form\RegistrationType
 
+easy_admin:
+    entities:
+        - EX\GrumpyBundle\Entity\Utilisateur
+
 framework:
     #esi: ~
     translator: { fallbacks: ['%locale%'] }
