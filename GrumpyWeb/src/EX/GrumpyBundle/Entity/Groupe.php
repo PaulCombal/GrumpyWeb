@@ -7,9 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
  
 /**
  * @ORM\Entity
- * @ORM\Table(name="role")
+ * @ORM\Table(name="groupe")
  */
-class Role extends BaseGroup
+class Groupe extends BaseGroup
 {
     /**
      * @ORM\Id

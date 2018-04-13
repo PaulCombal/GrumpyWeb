@@ -13,7 +13,7 @@ fos_user:
     firewall_name: main
     user_class: EX\GrumpyBundle\Entity\Utilisateur
     group:
-        group_class: EX\GrumpyBundle\Entity\Role
+        group_class: EX\GrumpyBundle\Entity\Groupe
     service:
         mailer: fos_user.mailer.twig_swift
     from_email:
