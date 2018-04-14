@@ -19,6 +19,6 @@ class Groupe extends BaseGroup
      protected $id;
 
 	public function __toString() {
-		return "Groupe TODO";
+		return $this->getName();
 	}
 }
