@@ -5,12 +5,12 @@ namespace EX\GrumpyBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Inscription
+ * UserGroupe
  *
- * @ORM\Table(name="inscription", indexes={@ORM\Index(name="FK_inscription_id_utilisateur", columns={"id_utilisateur"}), @ORM\Index(name="FK_inscription_id_evenement", columns={"id_evenement"})})
+ * @ORM\Table(name="user_groupe", indexes={@ORM\Index(name="FK_user_groupe_id_groupe", columns={"id_groupe"}), @ORM\Index(name="FK_user_groupe_id_utilisateur", columns={"id_utilisateur"})})
  * @ORM\Entity
  */
-class Inscription
+class UserGroupe
 {
     /**
      * @var int
@@ -22,14 +22,14 @@ class Inscription
     private $id;
 
     /**
-     * @var \Evenement
+     * @var \Groupe
      *
-     * @ORM\ManyToOne(targetEntity="Evenement")
+     * @ORM\ManyToOne(targetEntity="Groupe")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_evenement", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_groupe", referencedColumnName="id")
      * })
      */
-    private $idEvenement;
+    private $idGroupe;
 
     /**
      * @var \Utilisateur
@@ -54,27 +54,27 @@ class Inscription
     }
 
     /**
-     * Set idEvenement.
+     * Set idGroupe.
      *
-     * @param \EX\GrumpyBundle\Entity\Evenement|null $idEvenement
+     * @param \EX\GrumpyBundle\Entity\Groupe|null $idGroupe
      *
-     * @return Inscription
+     * @return UserGroupe
      */
-    public function setIdEvenement(\EX\GrumpyBundle\Entity\Evenement $idEvenement = null)
+    public function setIdGroupe(\EX\GrumpyBundle\Entity\Groupe $idGroupe = null)
     {
-        $this->idEvenement = $idEvenement;
+        $this->idGroupe = $idGroupe;
 
         return $this;
     }
 
     /**
-     * Get idEvenement.
+     * Get idGroupe.
      *
-     * @return \EX\GrumpyBundle\Entity\Evenement|null
+     * @return \EX\GrumpyBundle\Entity\Groupe|null
      */
-    public function getIdEvenement()
+    public function getIdGroupe()
     {
-        return $this->idEvenement;
+        return $this->idGroupe;
     }
 
     /**
@@ -82,7 +82,7 @@ class Inscription
      *
      * @param \EX\GrumpyBundle\Entity\Utilisateur|null $idUtilisateur
      *
-     * @return Inscription
+     * @return UserGroupe
      */
     public function setIdUtilisateur(\EX\GrumpyBundle\Entity\Utilisateur $idUtilisateur = null)
     {

@@ -5,12 +5,12 @@ namespace EX\GrumpyBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Inscription
+ * Panier
  *
- * @ORM\Table(name="inscription", indexes={@ORM\Index(name="FK_inscription_id_utilisateur", columns={"id_utilisateur"}), @ORM\Index(name="FK_inscription_id_evenement", columns={"id_evenement"})})
+ * @ORM\Table(name="panier", indexes={@ORM\Index(name="FK_panier_id_utilisateur", columns={"id_utilisateur"})})
  * @ORM\Entity
  */
-class Inscription
+class Panier
 {
     /**
      * @var int
@@ -20,16 +20,6 @@ class Inscription
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
-    /**
-     * @var \Evenement
-     *
-     * @ORM\ManyToOne(targetEntity="Evenement")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_evenement", referencedColumnName="id")
-     * })
-     */
-    private $idEvenement;
 
     /**
      * @var \Utilisateur
@@ -54,35 +44,11 @@ class Inscription
     }
 
     /**
-     * Set idEvenement.
-     *
-     * @param \EX\GrumpyBundle\Entity\Evenement|null $idEvenement
-     *
-     * @return Inscription
-     */
-    public function setIdEvenement(\EX\GrumpyBundle\Entity\Evenement $idEvenement = null)
-    {
-        $this->idEvenement = $idEvenement;
-
-        return $this;
-    }
-
-    /**
-     * Get idEvenement.
-     *
-     * @return \EX\GrumpyBundle\Entity\Evenement|null
-     */
-    public function getIdEvenement()
-    {
-        return $this->idEvenement;
-    }
-
-    /**
      * Set idUtilisateur.
      *
      * @param \EX\GrumpyBundle\Entity\Utilisateur|null $idUtilisateur
      *
-     * @return Inscription
+     * @return Panier
      */
     public function setIdUtilisateur(\EX\GrumpyBundle\Entity\Utilisateur $idUtilisateur = null)
     {

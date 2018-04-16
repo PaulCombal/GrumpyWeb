@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Commentaire
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
@@ -22,14 +22,14 @@ class Commentaire
     private $id;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="contenu", type="string", length=25, nullable=true)
      */
     private $contenu;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="type_contenu", type="string", length=25, nullable=true)
      */

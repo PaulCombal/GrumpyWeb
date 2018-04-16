@@ -3,7 +3,6 @@
 namespace EX\GrumpyBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Evenement
@@ -14,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class Evenement
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
@@ -30,42 +29,42 @@ class Evenement
     private $nom;
 
     /**
-     * @var float
+     * @var float|null
      *
      * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=true)
      */
     private $prix;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      *
      * @ORM\Column(name="date_debut", type="datetime", nullable=true)
      */
     private $dateDebut;
 
     /**
-     * @var integer
+     * @var int|null
      *
      * @ORM\Column(name="repetition", type="integer", nullable=true)
      */
     private $repetition;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="description", type="string", length=25, nullable=true)
      */
     private $description;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="statut", type="string", length=25, nullable=true)
      */
     private $statut;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="chemin_image", type="string", length=25, nullable=true)
      */
@@ -81,9 +80,6 @@ class Evenement
      */
     private $idUtilisateur;
 
-    public function _construct()
-    {
-    }
 
 
     /**

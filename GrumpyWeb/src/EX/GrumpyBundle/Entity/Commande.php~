@@ -1,0 +1,45 @@
+<?php
+
+namespace EX\GrumpyBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Commande
+ *
+ * @ORM\Table(name="commande", indexes={@ORM\Index(name="FK_commande_id_produit", columns={"id_produit"}), @ORM\Index(name="FK_commande_id_panier", columns={"id_panier"})})
+ * @ORM\Entity
+ */
+class Commande
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \Panier
+     *
+     * @ORM\ManyToOne(targetEntity="Panier")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_panier", referencedColumnName="id")
+     * })
+     */
+    private $idPanier;
+
+    /**
+     * @var \Produit
+     *
+     * @ORM\ManyToOne(targetEntity="Produit")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_produit", referencedColumnName="id")
+     * })
+     */
+    private $idProduit;
+
+
+}

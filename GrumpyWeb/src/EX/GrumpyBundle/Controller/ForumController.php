@@ -104,7 +104,6 @@ class ForumController extends Controller
     {
 
       $produit = new Produit();
-      $produit->setNbreCommande(0);
       $form = $this->createForm(ProduitType::class, $produit);
 
 
@@ -124,6 +123,61 @@ class ForumController extends Controller
 
         return $this->render(
             '@EXGrumpy/Forum/add_product.html.twig',
+            array('form' => $form->createView())
+        );
+    }
+
+    public function add_commandeAction(Request $request)
+    {
+
+      $commande = new Commande();
+      $form = $this->createForm(CommandeType::class, $produit);
+
+
+      $form->handleRequest($request);
+
+      if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($commande);
+            $entityManager->flush();
+
+            // ... do any other work - like sending them an email, etc
+            // maybe set a "flash" success message for the user
+
+            return $this->redirectToRoute('ex_grumpy_add_commande');
+        }
+
+        return $this->render(
+            '@EXGrumpy/Forum/add_commande.html.twig',
+            array('form' => $form->createView())
+        );
+    }
+
+    public function add_commentaireAction(Request $request)
+    {
+
+      $commentaire = new Commentaire();
+      $commentaire->setNbreCommande(0);
+      $form = $this->createForm(CommentaireType::class, $commentaire);
+
+
+      $form->handleRequest($request);
+
+      if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($commentaire);
+            $entityManager->flush();
+
+            // ... do any other work - like sending them an email, etc
+            // maybe set a "flash" success message for the user
+
+            return $this->redirectToRoute('ex_grumpy_add_commentaire');
+        }
+
+        return $this->render(
+            '@EXGrumpy/Forum/add_commentaire.html.twig',
             array('form' => $form->createView())
         );
     }

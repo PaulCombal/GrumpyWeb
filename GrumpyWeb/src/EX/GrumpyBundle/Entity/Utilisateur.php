@@ -2,25 +2,19 @@
 
 namespace EX\GrumpyBundle\Entity;
 
-use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * Utilisateur
  *
- * @ORM\Table(name="utilisateur", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_1D1C63B392FC23A8", columns={"username_canonical"}), @ORM\UniqueConstraint(name="UNIQ_1D1C63B3A0D96FBF", columns={"email_canonical"}), @ORM\UniqueConstraint(name="UNIQ_1D1C63B3C05FB297", columns={"confirmation_token"})})
+ * @ORM\Table(name="utilisateur", indexes={@ORM\Index(name="FK_utilisateur_id_panier", columns={"id_panier"})})
  * @ORM\Entity
  */
 class Utilisateur extends BaseUser
 {
-
-    public function __construct()
-    {
-        parent::__construct();
-        // your own logic
-    }
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
@@ -29,57 +23,39 @@ class Utilisateur extends BaseUser
     protected $id;
 
     /**
-     * @ORM\Column(name="prenom_utilisateur", type="string", length=255)
-     */
-    protected $prenom;
-
-
-    /**
-     * @ORM\Column(name="nom_utilisateur", type="string", length=255)
+     * @var string|null
+     *
+     * @ORM\Column(name="nom", type="string", length=25, nullable=true)
      */
     protected $nom;
 
     /**
-     * @ORM\ManyToMany(targetEntity="EX\GrumpyBundle\Entity\Groupe")
-     * @ORM\JoinTable(name="user_groupe",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
-     * )
+     * @var string|null
+     *
+     * @ORM\Column(name="prenom", type="string", length=25, nullable=true)
      */
-    protected $groups;
+    protected $prenom;
 
     /**
-     * Set prenom.
+     * @var \Panier
      *
-     * @param string $prenom
-     *
-     * @return Utilisateur
+     * @ORM\ManyToOne(targetEntity="Panier")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_panier", referencedColumnName="id")
+     * })
      */
-    public function setPrenom($prenom)
-    {
-        $this->prenom = $prenom;
+    protected $idPanier;
 
-        return $this;
-    }
 
-    /**
-     * Get prenom.
-     *
-     * @return string
-     */
-    public function getPrenom()
-    {
-        return $this->prenom;
-    }
 
     /**
      * Set nom.
      *
-     * @param string $nom
+     * @param string|null $nom
      *
      * @return Utilisateur
      */
-    public function setNom($nom)
+    public function setNom($nom = null)
     {
         $this->nom = $nom;
 
@@ -89,20 +65,58 @@ class Utilisateur extends BaseUser
     /**
      * Get nom.
      *
-     * @return string
+     * @return string|null
      */
     public function getNom()
     {
         return $this->nom;
     }
 
-      /**
-     * Get id.
+    /**
+     * Set prenom.
      *
-     * @return integer
+     * @param string|null $prenom
+     *
+     * @return Utilisateur
      */
-    public function getId()
+    public function setPrenom($prenom = null)
     {
-        return $this->id;
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    /**
+     * Get prenom.
+     *
+     * @return string|null
+     */
+    public function getPrenom()
+    {
+        return $this->prenom;
+    }
+
+    /**
+     * Set idPanier.
+     *
+     * @param \EX\GrumpyBundle\Entity\Panier|null $idPanier
+     *
+     * @return Utilisateur
+     */
+    public function setIdPanier(\EX\GrumpyBundle\Entity\Panier $idPanier = null)
+    {
+        $this->idPanier = $idPanier;
+
+        return $this;
+    }
+
+    /**
+     * Get idPanier.
+     *
+     * @return \EX\GrumpyBundle\Entity\Panier|null
+     */
+    public function getIdPanier()
+    {
+        return $this->idPanier;
     }
 }

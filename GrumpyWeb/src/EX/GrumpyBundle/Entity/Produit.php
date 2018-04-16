@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Produit
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
@@ -22,39 +22,32 @@ class Produit
     private $id;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="nom", type="string", length=25, nullable=true)
      */
     private $nom;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="description", type="string", length=25, nullable=true)
      */
     private $description;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="categorie", type="string", length=25, nullable=true)
      */
     private $categorie;
 
     /**
-     * @var integer
+     * @var int|null
      *
      * @ORM\Column(name="prix", type="integer", nullable=true)
      */
     private $prix;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="nbre_commande", type="integer", nullable=true)
-     */
-    private $nbreCommande;
 
 
 
@@ -162,29 +155,5 @@ class Produit
     public function getPrix()
     {
         return $this->prix;
-    }
-
-    /**
-     * Set nbreCommande.
-     *
-     * @param int|null $nbreCommande
-     *
-     * @return Produit
-     */
-    public function setNbreCommande($nbreCommande = null)
-    {
-        $this->nbreCommande = $nbreCommande;
-
-        return $this;
-    }
-
-    /**
-     * Get nbreCommande.
-     *
-     * @return int|null
-     */
-    public function getNbreCommande()
-    {
-        return $this->nbreCommande;
     }
 }

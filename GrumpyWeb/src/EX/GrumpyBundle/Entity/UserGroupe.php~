@@ -5,12 +5,12 @@ namespace EX\GrumpyBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Inscription
+ * UserGroupe
  *
- * @ORM\Table(name="inscription", indexes={@ORM\Index(name="FK_inscription_id_utilisateur", columns={"id_utilisateur"}), @ORM\Index(name="FK_inscription_id_evenement", columns={"id_evenement"})})
+ * @ORM\Table(name="user_groupe", indexes={@ORM\Index(name="FK_user_groupe_id_groupe", columns={"id_groupe"}), @ORM\Index(name="FK_user_groupe_id_utilisateur", columns={"id_utilisateur"})})
  * @ORM\Entity
  */
-class Inscription
+class UserGroupe
 {
     /**
      * @var int
@@ -22,14 +22,14 @@ class Inscription
     private $id;
 
     /**
-     * @var \Evenement
+     * @var \Groupe
      *
-     * @ORM\ManyToOne(targetEntity="Evenement")
+     * @ORM\ManyToOne(targetEntity="Groupe")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_evenement", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_groupe", referencedColumnName="id")
      * })
      */
-    private $idEvenement;
+    private $idGroupe;
 
     /**
      * @var \Utilisateur
