@@ -69,6 +69,11 @@ class ForumController extends Controller
     public function add_eventAction(Request $request)
     {
       $user = $this->getUser();
+
+      if ($user == null) {
+        die("Veuillez vous connecter.");
+      }
+
       $evenement = new Evenement();
       $evenement->setStatut("idée");
       $evenement->setIdUtilisateur($user->getid());
