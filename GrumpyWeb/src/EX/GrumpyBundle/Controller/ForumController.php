@@ -180,6 +180,78 @@ class ForumController extends Controller
             '@EXGrumpy/Forum/add_commentaire.html.twig',
             array('form' => $form->createView())
         );
+      }
+
+    public function view_ideeAction(Request $request) {
+      $user = $this->getUser();
+      if ($user == null) {
+        return $this->redirectToRoute('fos_user_security_login');
+      }
+
+      $events = $this->getDoctrine()
+        ->getRepository(Evenement::class)
+        ->findBy
+        (
+          [ 'statut' => 'idée' ],
+          null,
+          10,
+          0
+        );
+
+      $temp = [];
+      foreach ($events as &$event) {
+        $temp[] = 
+        [
+          "title" => $event->getNom(), 
+          "price" => $event->getPrix(), 
+          "start_date" => $event->getDateDebut(), 
+          "repetition" => "Tous les " . $event->getRepetition() . " jours",
+          "description" => $event->getDescription(),
+          "statut" => $event->getStatut(),
+          "chemin_image" => "http://via.placeholder.com/350x150"
+        ];
+      }
+
+      unset($events);
+
+      return $this->render('@EXGrumpy/Forum/view_idee.html.twig', ['events' => $temp]);
+    }
+
+    public function view_eventsAction(Request $request) {
+      $user = $this->getUser();
+      if ($user == null) {
+        return $this->redirectToRoute('fos_user_security_login');
+      }
+
+      $events = $this->getDoctrine()
+        ->getRepository(Evenement::class)
+        ->findBy
+        (
+          [ 'statut' => 'officiel' ],
+          null,
+          10,
+          0
+        );
+
+      $temp = [];
+      foreach ($events as &$event) {
+        $temp[] = 
+        [
+          "title" => $event->getNom(), 
+          "price" => $event->getPrix(), 
+          "start_date" => $event->getDateDebut(), 
+          "repetition" => "Tous les " . $event->getRepetition() . " jours",
+          "description" => $event->getDescription(),
+          "statut" => $event->getStatut(),
+          "chemin_image" => "http://via.placeholder.com/350x150"
+        ];
+      }
+
+      unset($events);
+
+      return $this->render('@EXGrumpy/Forum/view_events.html.twig', ['events' => $temp]);
+    }
+
 
     public function viewAction($event_id) {
       $user = $this->getUser();
@@ -195,7 +267,7 @@ class ForumController extends Controller
       [
         "title" => $event->getNom(), 
         "price" => $event->getPrix(), 
-        "start_date" => "10-10-10", 
+        "start_date" => $event->getDateDebut(), 
         "repetition" => "Tous les " . $event->getRepetition() . " jours",
         "description" => $event->getDescription(),
         "statut" => $event->getStatut(),

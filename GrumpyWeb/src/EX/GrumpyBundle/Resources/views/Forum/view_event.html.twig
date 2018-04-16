@@ -11,7 +11,7 @@
   <h2>{{ title }}</h2>
   {{ description }} <br />
   prix {{ price }} <br />
-  commence le {{ start_date }} <br />
+  commence le {{ start_date|date('Y-m-d') }} <br />
   repetition {{ repetition }}<br />
   statut {{ statut }} <br />
   <img alt="event" src="{{ chemin_image }}" />

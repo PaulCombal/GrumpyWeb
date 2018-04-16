@@ -12,6 +12,14 @@ ex_grumpy_view:
     requirements:
         event_id: '\d+'
 
+ex_grumpy_boite_idees:
+    path:     /boite_idees
+    defaults: { _controller: EXGrumpyBundle:Forum:view_idee }
+
+ex_grumpy_evenements:
+    path:     /evenements
+    defaults: { _controller: EXGrumpyBundle:Forum:view_events }
+
 ex_grumpy_add_event:
     path:     /add_event
     defaults: { _controller: EXGrumpyBundle:Forum:add_event }
