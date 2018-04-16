@@ -76,7 +76,7 @@ class ForumController extends Controller
 
       $evenement = new Evenement();
       $evenement->setStatut("idée");
-      $evenement->setIdUtilisateur($user->getid());
+      $evenement->setIdUtilisateur($user);
       $form = $this->createForm(EvenementType::class, $evenement);
 
 
