@@ -271,7 +271,7 @@ class Evenement
      *
      * @return Evenement
      */
-    public function setIdUtilisateur($idUtilisateur)
+    public function setIdUtilisateur(\EX\GrumpyBundle\Entity\Utilisateur $idUtilisateur = null)
     {
         $this->idUtilisateur = $idUtilisateur;
 
