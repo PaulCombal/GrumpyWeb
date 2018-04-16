@@ -13,6 +13,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Utilisateur extends BaseUser
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+        $this->roles = array('ROLE_USER');
+    }
     /**
      * @var integer
      *

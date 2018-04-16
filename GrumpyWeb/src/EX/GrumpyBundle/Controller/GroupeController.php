@@ -60,8 +60,8 @@ class GroupeController extends Controller
      */
     public function newAction()
     {
-        $groupe = new Groupe();
-        $form = $this->createForm(new GroupeType(), $groupe);
+        $groupe = new Groupe(md5(rand()));
+        $form = $this->createForm(GroupeType::class, $groupe);
 
         return array(
             'groupe' => $groupe,
@@ -78,8 +78,8 @@ class GroupeController extends Controller
      */
     public function createAction(Request $request)
     {
-        $groupe = new Groupe();
-        $form = $this->createForm(new GroupeType(), $groupe);
+        $groupe = new Groupe(md5(rand()));
+        $form = $this->createForm(GroupeType::class, $groupe);
         if ($form->handleRequest($request)->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($groupe);
@@ -103,7 +103,7 @@ class GroupeController extends Controller
      */
     public function editAction(Groupe $groupe)
     {
-        $editForm = $this->createForm(new GroupeType(), $groupe, array(
+        $editForm = $this->createForm(GroupeType::class, $groupe, array(
             'action' => $this->generateUrl('admin_groups_update', array('id' => $groupe->getId())),
             'method' => 'PUT',
         ));
@@ -125,7 +125,7 @@ class GroupeController extends Controller
      */
     public function updateAction(Groupe $groupe, Request $request)
     {
-        $editForm = $this->createForm(new GroupeType(), $groupe, array(
+        $editForm = $this->createForm(GroupeType::class, $groupe, array(
             'action' => $this->generateUrl('admin_groups_update', array('id' => $groupe->getId())),
             'method' => 'PUT',
         ));

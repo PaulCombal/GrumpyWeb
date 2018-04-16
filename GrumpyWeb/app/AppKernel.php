@@ -20,7 +20,8 @@ class AppKernel extends Kernel
             new EX\GrumpyBundle\EXGrumpyBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-            new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle()
+            new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(),
+            new EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

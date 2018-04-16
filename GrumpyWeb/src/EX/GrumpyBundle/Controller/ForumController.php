@@ -1,6 +1,7 @@
 <?php
 
 namespace EX\GrumpyBundle\Controller;
+use EX\GrumpyBundle\Entity\Groupe;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -17,6 +18,9 @@ class ForumController extends Controller
 {
  public function indexAction()
   {
+    $bite = "Je n'ai pas le pouvoir de confirmer les idees";
+    if(TRUE ===$this->get('security.authorization_checker')->isGranted('ROLE_CONFIRM_IDEAS') )
+      $bite = "Je peux modifier les idees";
 
     $listAdverts = array(
       array(
@@ -28,7 +32,7 @@ class ForumController extends Controller
       array(
         'title'   => 'Manger des gauffres',
         'id'      => 2,
-        'author'  => 'Hugo',
+        'author'  => $bite,
         'content' => 'Nous recherchons un webmaster capable de maintenir notre site internet. Blabla…',
         'date'    => new \Datetime()),
       array(
@@ -38,6 +42,7 @@ class ForumController extends Controller
         'content' => 'Nous proposons un poste pour webdesigner. Blabla…',
         'date'    => new \Datetime())
     );
+
     // Mais pour l'instant, on ne fait qu'appeler le template
     return $this->render("@EXGrumpy/Forum/index.html.twig", array(
       'listAdverts' => $listAdverts
