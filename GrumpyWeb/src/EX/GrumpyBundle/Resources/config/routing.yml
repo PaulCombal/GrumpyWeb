@@ -2,11 +2,35 @@ ex_grumpy_homepage:
     path:     /
     defaults: { _controller: EXGrumpyBundle:Forum:index }
 
+ex_grumpy_add:
+    path:     /add
+    defaults: { _controller: EXGrumpyBundle:Forum:add }
+
+ex_grumpy_view:
+    path:     /view_event
+    defaults: { _controller: EXGrumpyBundle:Forum:view }
+
 ex_grumpy_add_event:
     path:     /add_event
     defaults: { _controller: EXGrumpyBundle:Forum:add_event }
 
-ex_grumpy_view:
+ex_grumpy_view_event:
     path:     /view_event
     defaults: { _controller: EXGrumpyBundle:Forum:view_event }
+
+ex_grumpy_add_comment:
+    path:     /add_comment
+    defaults: { _controller: EXGrumpyBundle:Forum:add_comment }
+
+ex_grumpy_view_event:
+    path:     /view_comment
+    defaults: { _controller: EXGrumpyBundle:Forum:view_comment }
+
+ex_grumpy_add_product:
+    path:     /add_product
+    defaults: { _controller: EXGrumpyBundle:Forum:add_product }
+
+ex_grumpy_view_product:
+    path:     /view_product
+    defaults: { _controller: EXGrumpyBundle:Forum:view_product }    
 
