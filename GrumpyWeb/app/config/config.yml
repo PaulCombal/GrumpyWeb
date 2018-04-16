@@ -26,6 +26,7 @@ fos_user:
 easy_admin:
     entities:
         - EX\GrumpyBundle\Entity\Utilisateur
+        - EX\GrumpyBundle\Entity\Evenement
 
 framework:
     #esi: ~
