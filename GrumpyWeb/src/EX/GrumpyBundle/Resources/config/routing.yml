@@ -7,8 +7,10 @@ ex_grumpy_add:
     defaults: { _controller: EXGrumpyBundle:Forum:add }
 
 ex_grumpy_view:
-    path:     /view_event
+    path:     /view_event/{event_id}
     defaults: { _controller: EXGrumpyBundle:Forum:view }
+    requirements:
+        event_id: '\d+'
 
 ex_grumpy_add_event:
     path:     /add_event
