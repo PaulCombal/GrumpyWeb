@@ -95,4 +95,14 @@ class Utilisateur extends BaseUser
     {
         return $this->nom;
     }
+
+      /**
+     * Get id.
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 }
