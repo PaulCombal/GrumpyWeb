@@ -10,7 +10,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use EX\GrumpyBundle\Entity\Evenement;
+use EX\GrumpyBundle\Entity\Produit;
 use EX\GrumpyBundle\Form\EvenementType;
+use EX\GrumpyBundle\Form\ProduitType;
 use Symfony\Component\Security\Http\Firewall\ContextListener;
 
 
@@ -94,6 +96,34 @@ class ForumController extends Controller
 
         return $this->render(
             '@EXGrumpy/Forum/add_event.html.twig',
+            array('form' => $form->createView())
+        );
+    }
+
+    public function add_productAction(Request $request)
+    {
+
+      $produit = new Produit();
+      $produit->setNbreCommande(0);
+      $form = $this->createForm(ProduitType::class, $produit);
+
+
+      $form->handleRequest($request);
+
+      if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($produit);
+            $entityManager->flush();
+
+            // ... do any other work - like sending them an email, etc
+            // maybe set a "flash" success message for the user
+
+            return $this->redirectToRoute('ex_grumpy_add_product');
+        }
+
+        return $this->render(
+            '@EXGrumpy/Forum/add_product.html.twig',
             array('form' => $form->createView())
         );
     }
