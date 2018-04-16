@@ -128,4 +128,28 @@ class ForumController extends Controller
         );
     }
 
+    public function viewAction($event_id) {
+      $user = $this->getUser();
+      if ($user == null) {
+        return $this->redirectToRoute('fos_user_security_login');
+      }
+
+      $event = $this->getDoctrine()
+        ->getRepository(Evenement::class)
+        ->find($event_id);
+
+      $event = 
+      [
+        "title" => $event->getNom(), 
+        "price" => $event->getPrix(), 
+        "start_date" => "10-10-10", 
+        "repetition" => "Tous les " . $event->getRepetition() . " jours",
+        "description" => $event->getDescription(),
+        "statut" => $event->getStatut(),
+        "chemin_image" => "http://via.placeholder.com/350x150"
+      ];
+
+      return $this->render('@EXGrumpy/Forum/view_event.html.twig', $event);
+    }
+
 }

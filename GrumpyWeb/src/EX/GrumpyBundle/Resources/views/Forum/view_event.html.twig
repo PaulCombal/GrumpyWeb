@@ -1,0 +1,18 @@
+{# src/EX/GrumpyWebBundle/Resources/views/Forum/view_event.html.twig #}
+
+{% extends "@EXGrumpy/layout.html.twig" %}
+
+{% block title %}
+  {{ title }} - {{ parent() }}
+{% endblock %}
+
+{% block ocplatform_body %}
+
+  <h2>{{ title }}</h2>
+  {{ description }} <br />
+  prix {{ price }} <br />
+  commence le {{ start_date }} <br />
+  repetition {{ repetition }}<br />
+  statut {{ statut }} <br />
+  <img alt="event" src="{{ chemin_image }}" />
+{% endblock %}
