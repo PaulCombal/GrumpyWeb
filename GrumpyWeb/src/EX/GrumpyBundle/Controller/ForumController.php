@@ -14,6 +14,7 @@ use EX\GrumpyBundle\Entity\Produit;
 use EX\GrumpyBundle\Entity\Commentaire;
 use EX\GrumpyBundle\Entity\Commande;
 use EX\GrumpyBundle\Form\CommentaireType;
+use EX\GrumpyBundle\Entity\Inscription;
 use EX\GrumpyBundle\Form\EvenementType;
 use EX\GrumpyBundle\Form\ProduitType;
 use Symfony\Component\Security\Http\Firewall\ContextListener;
@@ -24,35 +25,12 @@ class ForumController extends Controller
 {
  public function indexAction()
   {
-    $bite = "Je n'ai pas le pouvoir de confirmer les idees";
+    $test = "Je n'ai pas le pouvoir de confirmer les idees";
     if(TRUE ===$this->get('security.authorization_checker')->isGranted('ROLE_CONFIRM_IDEAS') )
-      $bite = "Je peux modifier les idees";
-
-    $listAdverts = array(
-      array(
-        'title'   => 'Grosse boite',
-        'id'      => 1,
-        'author'  => 'Alexandre',
-        'content' => 'Nous recherchons un développeur Symfony2 débutant sur Lyon. Blabla…',
-        'date'    => new \Datetime()),
-      array(
-        'title'   => 'Manger des gauffres',
-        'id'      => 2,
-        'author'  => $bite,
-        'content' => 'Nous recherchons un webmaster capable de maintenir notre site internet. Blabla…',
-        'date'    => new \Datetime()),
-      array(
-        'title'   => 'L\'art de la pose clope inopinée',
-        'id'      => 3,
-        'author'  => 'Nassim',
-        'content' => 'Nous proposons un poste pour webdesigner. Blabla…',
-        'date'    => new \Datetime())
-    );
+      $test = "Je peux modifier les idees";
 
     // Mais pour l'instant, on ne fait qu'appeler le template
-    return $this->render("@EXGrumpy/Forum/index.html.twig", array(
-      'listAdverts' => $listAdverts
-    ));
+    return $this->render("@EXGrumpy/Forum/index.html.twig");
   }
 
   public function menuAction($limit)
@@ -169,45 +147,123 @@ class ForumController extends Controller
 
       if ($form->isSubmitted() && $form->isValid()) {
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($commentaire);
-            $entityManager->flush();
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($commentaire);
+        $entityManager->flush();
 
-            // ... do any other work - like sending them an email, etc
-            // maybe set a "flash" success message for the user
+        // ... do any other work - like sending them an email, etc
+        // maybe set a "flash" success message for the user
 
-            return $this->redirectToRoute('ex_grumpy_add_comment',array('cat_comment' => $cat_comment));
-        }
+        return $this->redirectToRoute('ex_grumpy_add_comment',array('cat_comment' => $cat_comment));
+      }
 
-        switch ($cat_comment) {
-          case 'like':
-            return new Response("Vous avez mis un like");
-            break;
-          case 'dislike':
-            return new Response("Vous avez mis un dislike");
-            break;
-          case 'image':
-            return $this->render(
-            '@EXGrumpy/Forum/add_commentaire_'.$cat_comment.'.html.twig', ['form' => $form->createView()])
-            ;
-            break;
-          case 'commentaire':
-            return $this->render(
-            '@EXGrumpy/Forum/add_commentaire_'.$cat_comment.'.html.twig', ['form' => $form->createView()]);
-            break;
-          default:
-            die("Bvn in the matrix");
-            break;
-        }
-        
-
+      switch ($cat_comment) {
+        case 'like':
+          return new Response("Vous avez mis un like");
+          break;
+        case 'dislike':
+          return new Response("Vous avez mis un dislike");
+          break;
+        case 'image':
+          return $this->render(
+          '@EXGrumpy/Forum/add_commentaire_'.$cat_comment.'.html.twig', ['form' => $form->createView()]);
+          break;
+        case 'commentaire':
+          return $this->render(
+          '@EXGrumpy/Forum/add_commentaire_'.$cat_comment.'.html.twig', ['form' => $form->createView()]);
+          break;
+        default:
+          die("Bvn in the matrix");
+          break;
+      }
     }
+
+    public function view_ideeAction(Request $request) {
+      $user = $this->getUser();
+      if ($user == null) {
+        return $this->redirectToRoute('fos_user_security_login');
+      }
+
+      $events = $this->getDoctrine()
+        ->getRepository(Evenement::class)
+        ->findBy
+        (
+          [ 'statut' => 'idée' ],
+          null,
+          10,
+          0
+        );
+
+      $temp = [];
+      foreach ($events as &$event) {
+        $temp[] = 
+        [
+          "title" => $event->getNom(), 
+          "price" => $event->getPrix(), 
+          "start_date" => $event->getDateDebut(), 
+          "repetition" => "Tous les " . $event->getRepetition() . " jours",
+          "description" => $event->getDescription(),
+          "statut" => $event->getStatut(),
+          "chemin_image" => "http://via.placeholder.com/350x150"
+        ];
+      }
+
+      unset($events);
+
+      return $this->render('@EXGrumpy/Forum/view_idee.html.twig', ['events' => $temp]);
+    }
+
+    public function view_eventsAction(Request $request) {
+      $user = $this->getUser();
+      if ($user == null) {
+        return $this->redirectToRoute('fos_user_security_login');
+      }
+
+      $events = $this->getDoctrine()
+        ->getRepository(Evenement::class)
+        ->findBy
+        (
+          [ 'statut' => 'officiel' ],
+          null,
+          10,
+          0
+        );
+
+      $temp = [];
+      foreach ($events as &$event) {
+        $temp[] = 
+        [
+          "title" => $event->getNom(), 
+          "price" => $event->getPrix(), 
+          "start_date" => $event->getDateDebut(), 
+          "repetition" => "Tous les " . $event->getRepetition() . " jours",
+          "description" => $event->getDescription(),
+          "statut" => $event->getStatut(),
+          "chemin_image" => "http://via.placeholder.com/350x150"
+        ];
+      }
+
+      unset($events);
+
+      return $this->render('@EXGrumpy/Forum/view_events.html.twig', ['events' => $temp]);
+    }
+
 
     public function viewAction($event_id) {
       $user = $this->getUser();
       if ($user == null) {
         return $this->redirectToRoute('fos_user_security_login');
       }
+
+      $isSubscribedAlready = $this->getDoctrine()
+        ->getRepository(Inscription::class)
+        ->findBy
+        (
+          [ 'idEvenement' => $event_id, 'idUtilisateur' => $user->getId() ],
+          null,
+          1,
+          0
+        );
 
       $event = $this->getDoctrine()
         ->getRepository(Evenement::class)
@@ -222,9 +278,48 @@ class ForumController extends Controller
         "description" => $event->getDescription(),
         "statut" => $event->getStatut(),
         "chemin_image" => $event->getCheminImage(),
+        "event_id" => $event_id,
+        "is_subscribed" => sizeof($isSubscribedAlready) > 0
       ];
 
       return $this->render('@EXGrumpy/Forum/view_event.html.twig', $event);
+
+    }
+
+    public function subscribe_eventAction($event_id) {
+      $user = $this->getUser();
+      if ($user == null) {
+        return $this->redirectToRoute('fos_user_security_login');
+      }
+
+      $isSubscribedAlready = $this->getDoctrine()
+        ->getRepository(Inscription::class)
+        ->findBy
+        (
+          [ 'idEvenement' => $event_id, 'idUtilisateur' => $user->getId() ],
+          null,
+          1,
+          0
+        );
+
+      if (sizeof($isSubscribedAlready) > 0) {
+        return $this->redirectToRoute('ex_grumpy_view', ['event_id' => $event_id]);
+      }
+
+      $event = $this->getDoctrine()
+        ->getRepository(Evenement::class)
+        ->find($event_id);
+
+      $inscription = new Inscription();
+      $inscription->setIdEvenement($event);
+      $inscription->setIdUtilisateur($user);
+
+      $entityManager = $this->getDoctrine()->getManager();
+      $entityManager->persist($inscription);
+      $entityManager->flush();
+
+
+      return $this->redirectToRoute('ex_grumpy_view', ['event_id' => $event_id]);
 
     }
 
