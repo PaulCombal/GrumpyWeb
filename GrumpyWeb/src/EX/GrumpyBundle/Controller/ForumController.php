@@ -136,10 +136,28 @@ class ForumController extends Controller
 				);
 		}
 
-		public function add_commentaireAction(Request $request, $cat_comment)
+		public function add_commentaireAction(Request $request, $cat_comment, $event_id)
 		{
+			$user = $this->getUser();
+			if ($user == null) {
+				die("Veuillez vous connecter.");
+			}
+			$evenement = $this->getDoctrine()
+				->getRepository(Evenement::class)
+				->findBy
+				(
+					[ 'id' => $event_id ],
+					null,
+					1,
+					0
+				);
+
 			$commentaire = new Commentaire();
+			$commentaire->setIdEvenement(current($evenement));
+			$commentaire->setIdUtilisateur($user);
 			$commentaire->setTypeContenu($cat_comment);
+
+			
 			$form = $this->createForm(CommentaireType::class, $commentaire);
 
 
@@ -154,7 +172,7 @@ class ForumController extends Controller
 				// ... do any other work - like sending them an email, etc
 				// maybe set a "flash" success message for the user
 
-				return $this->redirectToRoute('ex_grumpy_add_comment',array('cat_comment' => $cat_comment));
+				return $this->redirectToRoute('ex_grumpy_view_event', ['event_id' => $event_id]);
 			}
 
 			switch ($cat_comment) {
@@ -249,66 +267,66 @@ class ForumController extends Controller
 		}
 
 
-    public function viewAction($event_id) {
-      $user = $this->getUser();
-      if ($user == null) {
-        return $this->redirectToRoute('fos_user_security_login');
-      }
+		public function viewAction($event_id) {
+			$user = $this->getUser();
+			if ($user == null) {
+				return $this->redirectToRoute('fos_user_security_login');
+			}
 
-      $isSubscribedAlready = $this->getDoctrine()
-        ->getRepository(Inscription::class)
-        ->findBy
-        (
-          [ 'idEvenement' => $event_id, 'idUtilisateur' => $user->getId() ],
-          null,
-          1,
-          0
-        );
+			$isSubscribedAlready = $this->getDoctrine()
+				->getRepository(Inscription::class)
+				->findBy
+				(
+					[ 'idEvenement' => $event_id, 'idUtilisateur' => $user->getId() ],
+					null,
+					1,
+					0
+				);
 
-      $event = $this->getDoctrine()
-        ->getRepository(Evenement::class)
-        ->find($event_id);
+			$event = $this->getDoctrine()
+				->getRepository(Evenement::class)
+				->find($event_id);
 
-      $commentaires = $this->getDoctrine()
-        ->getRepository(Commentaire::class)
-        ->findBy
-        (
-          [ 'idEvenement' => $event_id],
-          null,
-          50,
-          0
-        );
+			$commentaires = $this->getDoctrine()
+				->getRepository(Commentaire::class)
+				->findBy
+				(
+					[ 'idEvenement' => $event_id],
+					null,
+					50,
+					0
+				);
 
-        $temp = [];
-        
-      foreach ($commentaires as &$commentaire) {
+				$temp = [];
+				
+			foreach ($commentaires as &$commentaire) {
 
-        $temp[] = 
-        [
-          "contenu" => $commentaire->getContenu(),
-          "poster_name" => $commentaire->getIdUtilisateur(),
-          "type" => $commentaire->getTypeContenu()
-        ];
-      }
+				$temp[] = 
+				[
+					"contenu" => $commentaire->getContenu(),
+					"poster_name" => $commentaire->getIdUtilisateur(),
+					"type" => $commentaire->getTypeContenu()
+				];
+			}
 
-      $event = 
-      [
-        "title" => $event->getNom(), 
-        "price" => $event->getPrix(), 
-        "start_date" => $event->getDateDebut(), 
-        "repetition" => "Tous les " . $event->getRepetition() . " jours",
-        "description" => $event->getDescription(),
-        "statut" => $event->getStatut(),
-        "chemin_image" => $event->getCheminImage(),
-        "event_id" => $event_id,
-        "is_subscribed" => sizeof($isSubscribedAlready) > 0,
-        "commentaires" => $temp
-      ];
+			$event = 
+			[
+				"title" => $event->getNom(), 
+				"price" => $event->getPrix(), 
+				"start_date" => $event->getDateDebut(), 
+				"repetition" => "Tous les " . $event->getRepetition() . " jours",
+				"description" => $event->getDescription(),
+				"statut" => $event->getStatut(),
+				"chemin_image" => $event->getCheminImage(),
+				"event_id" => $event_id,
+				"is_subscribed" => sizeof($isSubscribedAlready) > 0,
+				"commentaires" => $temp
+			];
 
 
-      return $this->render('@EXGrumpy/Forum/view_event.html.twig', $event);
+			return $this->render('@EXGrumpy/Forum/view_event.html.twig', $event);
 
-    }
+		}
 
 		public function subscribe_eventAction($event_id) {
 			$user = $this->getUser();
@@ -386,11 +404,11 @@ class ForumController extends Controller
 
 			$product = 
 			[
-        "name" => $product->getNom(),
-        "price" => $product->getPrix() . '€',
-        "description" => $product->getDescription(),
-        "category" => $product->getCategorie(),
-        "chemin_image" => "http://via.placeholder.com/350x150"
+				"name" => $product->getNom(),
+				"price" => $product->getPrix() . '€',
+				"description" => $product->getDescription(),
+				"category" => $product->getCategorie(),
+				"chemin_image" => "http://via.placeholder.com/350x150"
 			];
 
 			return $this->render('@EXGrumpy/Forum/view_product.html.twig', $product);
