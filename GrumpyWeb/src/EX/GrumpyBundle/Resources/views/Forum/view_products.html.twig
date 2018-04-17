@@ -8,14 +8,125 @@
 
 {% block ocplatform_body %}
 
-  <h1>Produits</h1>
+  <h1>Boutique</h1>
 
-  {% for product in products %}
-    {{ product.name }} <br />
-    {{ product.description }} <br />
-      prix {{ product.price }} <br />
-      <img alt="product" src="{{ product.chemin_image }}" />
-  {% endfor %}
-
-  <hr />
+<div class="row">
+	<div class="col-md-3">
+		<h1 id="hautdepage" class="titre">La Boutique</h1>
+		<div class="liste-group">
+			<a href="../Categorie/categorie.html" class="list-group-item">Cat&eacutegorie 1</a>
+			<a href="../Categorie/categorie.html" class="list-group-item">Cat&eacutegorie 2</a>
+			<a href="../Categorie/categorie.html" class="list-group-item">Cat&eacutegorie 3</a>
+		</div>
+	</div>
+	<div class="col-md-9">
+		<h4 id="best">Nos produits les plus achet&eacutes :</h4>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="card h-100">
+					<a href="../Produits/produit.html"><img class="card-img-top" src="../produit.png" alt></a>
+					<div class="card-body">
+						<h4 class="card-title"><a href="../Produits/produit.html">Produit 1</a></h4>
+						<h5>
+							Prix
+						</h5>
+						<p class="card-text">
+							Descrption du produit
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card h-100">
+					<a href="../Produits/produit.html"><img class="card-img-top" src="../produit.png" alt></a>
+					<div class="card-body">
+						<h4 class="card-title"><a href="../Produits/produit.html">Produit 2</a></h4>
+						<h5>
+							Prix
+						</h5>
+						<p class="card-text">
+							Descrption du produit
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card h-100">
+					<a href="../Produits/produit.html"><img class="card-img-top" src="../produit.png" alt></a>
+					<div class="card-body">
+						<h4 class="card-title"><a href="../Produits/produit.html">Produit 3</a></h4>
+						<h5>
+							Prix
+						</h5>
+						<p class="card-text">
+							Descrption du produit
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3"></div>
+	<div class="col-md-9">
+		<h4 id="less">Tous les produits :</h4>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="card h-100">
+					<a href="../Produits/produit.html"><img class="card-img-top" src="../produit.png" alt></a>
+					<div class="card-body">
+						<h4 class="card-title"><a href="../Produits/produit.html">Produit 1</a></h4>
+						<h5>
+							Prix
+						</h5>
+						<p class="card-text">
+							Descrption du produit
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card h-100">
+					<a href="../Produits/produit.html"><img class="card-img-top" src="../produit.png" alt></a>
+					<div class="card-body">
+						<h4 class="card-title"><a href="../Produits/produit.html">Produit 2</a></h4>
+						<h5>
+							Prix
+						</h5>
+						<p class="card-text">
+							Descrption du produit
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card h-100">
+					<a href="../Produits/produit.html"><img class="card-img-top" src="../produit.png" alt></a>
+					<div class="card-body">
+						<h4 class="card-title"><a href="../Produits/produit.html">Produit 3</a></h4>
+						<h5>
+							Prix
+						</h5>
+						<p class="card-text">
+							Descrption du produit
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card h-100">
+					<a href="../Produits/produit.html"><img class="card-img-top" src="../produit.png" alt></a>
+					<div class="card-body">
+						<h4 class="card-title"><a href="../Produits/produit.html">Produit 4</a></h4>
+						<h5>
+							Prix
+						</h5>
+						<p class="card-text">
+							Descrption du produit
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock %}
