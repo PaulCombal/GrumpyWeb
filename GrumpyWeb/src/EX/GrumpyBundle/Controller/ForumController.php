@@ -323,4 +323,31 @@ class ForumController extends Controller
 
     }
 
+    public function view_productsAction(Request $request) {
+      $user = $this->getUser();
+      if ($user == null) {
+        return $this->redirectToRoute('fos_user_security_login');
+      }
+
+      $products = $this->getDoctrine()
+        ->getRepository(Produit::class)
+        ->findAll();
+
+      $temp = [];
+      foreach ($products as &$product) {
+        $temp[] = 
+        [
+          "name" => $product->getNom(),
+          "price" => $product->getPrix() . '€',
+          "description" => $product->getDescription(),
+          "category" => $product->getCategorie(),
+          "chemin_image" => "http://via.placeholder.com/350x150"
+        ];
+      }
+
+      unset($products);
+
+      return $this->render('@EXGrumpy/Forum/view_products.html.twig', ['products' => $temp]);
+    }
+
 }

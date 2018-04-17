@@ -1,0 +1,21 @@
+{# src/EX/GrumpyWebBundle/Resources/views/Forum/view_idee.html.twig #}
+
+{% extends "@EXGrumpy/layout.html.twig" %}
+
+{% block title %}
+  Boutique - {{ parent() }}
+{% endblock %}
+
+{% block ocplatform_body %}
+
+  <h1>Produits</h1>
+
+  {% for product in products %}
+    {{ product.name }} <br />
+    {{ product.description }} <br />
+      prix {{ product.price }} <br />
+      <img alt="product" src="{{ product.chemin_image }}" />
+  {% endfor %}
+
+  <hr />
+{% endblock %}

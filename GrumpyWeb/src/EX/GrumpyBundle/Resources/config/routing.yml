@@ -48,7 +48,12 @@ ex_grumpy_add_product:
     path:     /add_product
     defaults: { _controller: EXGrumpyBundle:Forum:add_product }
 
-ex_grumpy_view_product:
-    path:     /view_product
-    defaults: { _controller: EXGrumpyBundle:Forum:view_product }    
+ex_grumpy_view_products:
+    path:     /view_products
+    defaults: { _controller: EXGrumpyBundle:Forum:view_products }    
 
+ex_grumpy_view_product:
+    path:     /view_product/{product_id}
+    defaults: { _controller: EXGrumpyBundle:Forum:view_product }
+    requirements:
+        event_id: '\d+'
