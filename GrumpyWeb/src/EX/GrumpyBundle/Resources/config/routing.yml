@@ -21,8 +21,10 @@ ex_grumpy_view_event:
     defaults: { _controller: EXGrumpyBundle:Forum:view_event }
 
 ex_grumpy_add_comment:
-    path:     /add_comment
-    defaults: { _controller: EXGrumpyBundle:Forum:add_comment }
+    path:     /add_comment/{cat_comment}
+    defaults: {_controller: EXGrumpyBundle:Forum:add_commentaire}
+    requirements:
+        cat_comment: like|dislike|commentaire|image  
 
 ex_grumpy_view_event:
     path:     /view_comment

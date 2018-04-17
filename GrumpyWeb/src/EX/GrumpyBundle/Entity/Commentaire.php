@@ -3,7 +3,7 @@
 namespace EX\GrumpyBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 /**
  * Commentaire
  *
@@ -24,7 +24,7 @@ class Commentaire
     /**
      * @var string|null
      *
-     * @ORM\Column(name="contenu", type="string", length=25, nullable=true)
+     * @ORM\Column(name="contenu", type="string", length=2500, nullable=true)
      */
     private $contenu;
 

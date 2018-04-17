@@ -11,9 +11,13 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use EX\GrumpyBundle\Entity\Evenement;
 use EX\GrumpyBundle\Entity\Produit;
+use EX\GrumpyBundle\Entity\Commentaire;
+use EX\GrumpyBundle\Entity\Commande;
+use EX\GrumpyBundle\Form\CommentaireType;
 use EX\GrumpyBundle\Form\EvenementType;
 use EX\GrumpyBundle\Form\ProduitType;
 use Symfony\Component\Security\Http\Firewall\ContextListener;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class ForumController extends Controller
@@ -131,7 +135,7 @@ class ForumController extends Controller
     {
 
       $commande = new Commande();
-      $form = $this->createForm(CommandeType::class, $produit);
+      $form = $this->createForm(CommandeType::class, $commande);
 
 
       $form->handleRequest($request);
@@ -154,11 +158,10 @@ class ForumController extends Controller
         );
     }
 
-    public function add_commentaireAction(Request $request)
+    public function add_commentaireAction(Request $request, $cat_comment)
     {
-
       $commentaire = new Commentaire();
-      $commentaire->setNbreCommande(0);
+      $commentaire->setTypeContenu($cat_comment);
       $form = $this->createForm(CommentaireType::class, $commentaire);
 
 
@@ -173,13 +176,32 @@ class ForumController extends Controller
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
 
-            return $this->redirectToRoute('ex_grumpy_add_commentaire');
+            return $this->redirectToRoute('ex_grumpy_add_comment',array('cat_comment' => $cat_comment));
         }
 
-        return $this->render(
-            '@EXGrumpy/Forum/add_commentaire.html.twig',
-            array('form' => $form->createView())
-        );
+        switch ($cat_comment) {
+          case 'like':
+            return new Response("Vous avez mis un like");
+            break;
+          case 'dislike':
+            return new Response("Vous avez mis un dislike");
+            break;
+          case 'image':
+            return $this->render(
+            '@EXGrumpy/Forum/add_commentaire_'.$cat_comment.'.html.twig', ['form' => $form->createView()])
+            ;
+            break;
+          case 'commentaire':
+            return $this->render(
+            '@EXGrumpy/Forum/add_commentaire_'.$cat_comment.'.html.twig', ['form' => $form->createView()]);
+            break;
+          default:
+            die("Bvn in the matrix");
+            break;
+        }
+        
+
+    }
 
     public function viewAction($event_id) {
       $user = $this->getUser();
@@ -195,11 +217,11 @@ class ForumController extends Controller
       [
         "title" => $event->getNom(), 
         "price" => $event->getPrix(), 
-        "start_date" => "10-10-10", 
+        "start_date" => $event->getDateDebut(), 
         "repetition" => "Tous les " . $event->getRepetition() . " jours",
         "description" => $event->getDescription(),
         "statut" => $event->getStatut(),
-        "chemin_image" => "http://via.placeholder.com/350x150"
+        "chemin_image" => $event->getCheminImage(),
       ];
 
       return $this->render('@EXGrumpy/Forum/view_event.html.twig', $event);

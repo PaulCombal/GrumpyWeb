@@ -2,7 +2,7 @@
 
 namespace EX\GrumpyBundle\Form;
 
-use EX\GrumpyBundle\Entity\Evenement;
+use EX\GrumpyBundle\Entity\Produit;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
