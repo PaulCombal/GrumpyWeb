@@ -33,22 +33,6 @@ class ForumController extends Controller
 		return $this->render("@EXGrumpy/Forum/index.html.twig");
 	}
 
-	public function menuAction($limit)
-	{
-		// On fixe en dur une liste ici, bien entendu par la suite
-		// on la récupérera depuis la BDD !
-		$listAdverts = array(
-			array('id' => 2, 'title' => 'Recherche développeur Symfony'),
-			array('id' => 5, 'title' => 'Mission de webmaster'),
-			array('id' => 9, 'title' => 'Offre de stage webdesigner')
-		);
-
-		return $this->render("@EXGrumpy/Forum/menu.html.twig", array(
-			// Tout l'intérêt est ici : le contrôleur passe
-			// les variables nécessaires au template !
-			'listAdverts' => $listAdverts
-		));
-		}
 
 		public function add_eventAction(Request $request)
 		{
