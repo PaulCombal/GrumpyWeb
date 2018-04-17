@@ -14,10 +14,14 @@
   commence le {{ start_date|date('Y-m-d') }} <br />
   repetition {{ repetition }}<br />
   statut {{ statut }} <br />
-  <img alt="event" src="{{ chemin_image }}" />
+  <img alt="event" src="{{ chemin_image }}" /> <br />
+   {% for commentaire in commentaires %}
+    <br />{{commentaire.poster_name}} : {{commentaire.contenu}}
+  {% endfor %}
   {% if is_subscribed == true %}
   	Vous êtes inscrit à l'évènement
   {% else %}
+    <br />
   	<a href="{{ path('ex_grumpy_subscribe', {'event_id': event_id}) }}">S'inscrire à l'évènement</a>
   {% endif %}
 {% endblock %}

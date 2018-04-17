@@ -81,6 +81,19 @@ class Evenement
     private $idUtilisateur;
 
 
+    /**
+     * Set id.
+     *
+     * @param int $id
+     *
+     * @return Evenement
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     /**
      * Get id.

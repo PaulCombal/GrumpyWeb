@@ -136,10 +136,28 @@ class ForumController extends Controller
         );
     }
 
-    public function add_commentaireAction(Request $request, $cat_comment)
+    public function add_commentaireAction(Request $request, $cat_comment, $event_id)
     {
+      $user = $this->getUser();
+      if ($user == null) {
+        die("Veuillez vous connecter.");
+      }
+      $evenement = $this->getDoctrine()
+        ->getRepository(Evenement::class)
+        ->findBy
+        (
+          [ 'id' => $event_id ],
+          null,
+          1,
+          0
+        );
+
       $commentaire = new Commentaire();
+      $commentaire->setIdEvenement(current($evenement));
+      $commentaire->setIdUtilisateur($user);
       $commentaire->setTypeContenu($cat_comment);
+
+      
       $form = $this->createForm(CommentaireType::class, $commentaire);
 
 
@@ -154,7 +172,7 @@ class ForumController extends Controller
         // ... do any other work - like sending them an email, etc
         // maybe set a "flash" success message for the user
 
-        return $this->redirectToRoute('ex_grumpy_add_comment',array('cat_comment' => $cat_comment));
+        return $this->redirectToRoute('ex_grumpy_add_comment', array('event_id' => $event_id, 'cat_comment' => $cat_comment));
       }
 
       switch ($cat_comment) {
@@ -269,6 +287,28 @@ class ForumController extends Controller
         ->getRepository(Evenement::class)
         ->find($event_id);
 
+      $commentaires = $this->getDoctrine()
+        ->getRepository(Commentaire::class)
+        ->findBy
+        (
+          [ 'idEvenement' => $event_id],
+          null,
+          50,
+          0
+        );
+
+        $temp = [];
+        
+      foreach ($commentaires as &$commentaire) {
+
+        $temp[] = 
+        [
+          "contenu" => $commentaire->getContenu(),
+          "poster_name" => $commentaire->getIdUtilisateur(),
+          "type" => $commentaire->getTypeContenu()
+        ];
+      }
+
       $event = 
       [
         "title" => $event->getNom(), 
@@ -279,8 +319,10 @@ class ForumController extends Controller
         "statut" => $event->getStatut(),
         "chemin_image" => $event->getCheminImage(),
         "event_id" => $event_id,
-        "is_subscribed" => sizeof($isSubscribedAlready) > 0
+        "is_subscribed" => sizeof($isSubscribedAlready) > 0,
+        "commentaires" => $temp
       ];
+
 
       return $this->render('@EXGrumpy/Forum/view_event.html.twig', $event);
 
@@ -303,7 +345,7 @@ class ForumController extends Controller
         );
 
       if (sizeof($isSubscribedAlready) > 0) {
-        return $this->redirectToRoute('ex_grumpy_view', ['event_id' => $event_id]);
+        return $this->redirectToRoute('ex_grumpy_view_event', ['event_id' => $event_id]);
       }
 
       $event = $this->getDoctrine()
@@ -319,7 +361,7 @@ class ForumController extends Controller
       $entityManager->flush();
 
 
-      return $this->redirectToRoute('ex_grumpy_view', ['event_id' => $event_id]);
+      return $this->redirectToRoute('ex_grumpy_view_event', ['event_id' => $event_id]);
 
     }
 
