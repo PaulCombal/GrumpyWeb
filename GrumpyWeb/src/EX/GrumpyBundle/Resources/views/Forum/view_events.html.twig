@@ -1,0 +1,23 @@
+{# src/EX/GrumpyWebBundle/Resources/views/Forum/view_idee.html.twig #}
+
+{% extends "@EXGrumpy/layout.html.twig" %}
+
+{% block title %}
+  Évènements - {{ parent() }}
+{% endblock %}
+
+{% block ocplatform_body %}
+
+  <h1>Events officiels</h1>
+
+  {% for event in events %}
+    {{ event.title }} <br />
+    {{ event.description }} <br />
+      prix {{ event.price }} <br />
+      commence le {{ event.start_date|date('Y-m-d') }} <br />
+      repetition {{ event.repetition }}<br />
+      <img alt="event" src="{{ event.chemin_image }}" />
+  {% endfor %}
+
+  <hr />
+{% endblock %}

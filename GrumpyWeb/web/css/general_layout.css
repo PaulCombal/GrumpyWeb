@@ -1,0 +1,22 @@
+body
+{
+	height: 100%;
+	width: 100%;
+	font-family: 'Trebuchet MS', Helvetica, sans-serif;
+	padding-top: 50px;
+}
+
+h3
+{
+    padding-top: 0.5em;
+}
+
+#foot a
+{
+    color: #FFF;
+}
+
+#foot
+{
+    margin-top: 2em;
+}
