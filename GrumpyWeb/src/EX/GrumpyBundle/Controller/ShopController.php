@@ -51,26 +51,26 @@ class ShopController extends Controller
 
 
 	public function view_productAction($product_id) {
-			$user = $this->getUser();
-			if ($user == null) {
-				return $this->redirectToRoute('fos_user_security_login');
-			}
-
-			$product = $this->getDoctrine()
-				->getRepository(Produit::class)
-				->find($product_id);
-
-			$product = 
-			[
-				"name" => $product->getNom(),
-				"price" => $product->getPrix() . '€',
-				"description" => $product->getDescription(),
-				"category" => $product->getCategorie(),
-				"chemin_image" => "http://via.placeholder.com/350x150"
-			];
-
-			return $this->render('@EXGrumpy/Forum/view_product.html.twig', $product);
+		$user = $this->getUser();
+		if ($user == null) {
+			return $this->redirectToRoute('fos_user_security_login');
 		}
+
+		$product = $this->getDoctrine()
+			->getRepository(Produit::class)
+			->find($product_id);
+
+		$product = 
+		[
+			"name" => $product->getNom(),
+			"price" => $product->getPrix() . '€',
+			"description" => $product->getDescription(),
+			"category" => $product->getCategorie(),
+			"chemin_image" => "http://via.placeholder.com/350x150"
+		];
+
+		return $this->render('@EXGrumpy/Forum/view_product.html.twig', $product);
+	}
 
 
 
@@ -92,12 +92,12 @@ class ShopController extends Controller
 				$entityManager->flush();
 
 				return $this->redirectToRoute('ex_grumpy_add_product');
-			}
+		}
 
-			return $this->render(
-					'@EXGrumpy/Forum/add_product.html.twig',
-					array('form' => $form->createView())
-			);
+		return $this->render(
+				'@EXGrumpy/Forum/add_product.html.twig',
+				array('form' => $form->createView())
+		);
 	}
 
 
@@ -121,11 +121,11 @@ class ShopController extends Controller
 					$entityManager->flush();
 
 					return $this->redirectToRoute('ex_grumpy_add_commande');
-			}
+		}
 
-			return $this->render(
-					'@EXGrumpy/Forum/add_commande.html.twig',
-					array('form' => $form->createView())
-			);
+		return $this->render(
+				'@EXGrumpy/Forum/add_commande.html.twig',
+				array('form' => $form->createView())
+		);
 	}
 }
