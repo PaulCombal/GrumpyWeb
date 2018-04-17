@@ -8,20 +8,6 @@
 
 {% block ocplatform_body %}
 
-  <h2>Liste des annonces</h2>
-
-  <ul>
-    {% for advert in listAdverts %}
-      <li>
-        <a href="{{ path('ex_grumpy_view', {'event_id': advert.id}) }}">
-          {{ advert.title }}
-        </a>
-        par {{ advert.author }},
-        le {{ advert.date|date('d/m/Y') }}
-      </li>
-    {% else %}
-      <li>Pas (encore !) d'annonces</li>
-    {% endfor %}
-  </ul>
+<h2> Mon html de la page d'accueil </h2>
 
 {% endblock %}

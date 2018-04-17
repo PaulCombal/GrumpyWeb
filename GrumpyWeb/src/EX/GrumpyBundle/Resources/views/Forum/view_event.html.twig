@@ -15,4 +15,9 @@
   repetition {{ repetition }}<br />
   statut {{ statut }} <br />
   <img alt="event" src="{{ chemin_image }}" />
+  {% if is_subscribed == true %}
+  	Vous êtes inscrit à l'évènement
+  {% else %}
+  	<a href="{{ path('ex_grumpy_subscribe', {'event_id': event_id}) }}">S'inscrire à l'évènement</a>
+  {% endif %}
 {% endblock %}
