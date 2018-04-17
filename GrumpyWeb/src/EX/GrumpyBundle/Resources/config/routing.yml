@@ -2,44 +2,40 @@ ex_grumpy_homepage:
     path:     /
     defaults: { _controller: EXGrumpyBundle:Forum:index }
 
-ex_grumpy_add:
-    path:     /add
-    defaults: { _controller: EXGrumpyBundle:Forum:add }
-
 ex_grumpy_subscribe:
     path:     /subscribe_event/{event_id}
-    defaults: { _controller: EXGrumpyBundle:Forum:subscribe_event }
+    defaults: { _controller: EXGrumpyBundle:Event:subscribe_event }
     requirements:
         event_id: '\d+'
 
 ex_grumpy_boite_idees:
     path:     /boite_idees
-    defaults: { _controller: EXGrumpyBundle:Forum:view_idee }
+    defaults: { _controller: EXGrumpyBundle:Event:view_idee }
 
 ex_grumpy_evenements:
     path:     /evenements
-    defaults: { _controller: EXGrumpyBundle:Forum:view_events }
+    defaults: { _controller: EXGrumpyBundle:Event:view_events }
 
 ex_grumpy_add_event:
     path:     /add_event
-    defaults: { _controller: EXGrumpyBundle:Forum:add_event }
+    defaults: { _controller: EXGrumpyBundle:Event:add_event }
 
 ex_grumpy_view_event:
     path:     /view_event/{event_id}
-    defaults: { _controller: EXGrumpyBundle:Forum:view }
+    defaults: { _controller: EXGrumpyBundle:Event:view }
     requirements:
         event_id: '\d+'
 
 ex_grumpy_add_comment:
     path:     /add_comment/{event_id}/{cat_comment}
-    defaults: {_controller: EXGrumpyBundle:Forum:add_commentaire}
+    defaults: {_controller: EXGrumpyBundle:Event:add_commentaire}
     requirements:
         event_id: '\d+'
         cat_comment: like|dislike|commentaire|image  
 
 ex_grumpy_view_comments_by_event:
     path:     /view_comments/{event_id}
-    defaults: { _controller: EXGrumpyBundle:Forum:view_comments_by_event }
+    defaults: { _controller: EXGrumpyBundle:Event:view_comments_by_event }
 
 ex_grumpy_add_product:
     path:     /add_product
