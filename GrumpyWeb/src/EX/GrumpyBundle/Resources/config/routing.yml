@@ -64,3 +64,7 @@ ex_grumpy_view_panier:
 ex_grumpy_validate_commande:
     path:    /validate_commande
     defaults: { _controller: EXGrumpyBundle:Shop:validate_commande }
+
+ex_grumpy_legal:
+    path:    /legal
+    defaults: { _controller: EXGrumpyBundle:Forum:view_legal }

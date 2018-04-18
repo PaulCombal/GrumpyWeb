@@ -32,4 +32,9 @@ class ForumController extends Controller
 
 		return $this->render("@EXGrumpy/Forum/index.html.twig");
 	}
+
+	public function view_legalAction() {
+		return $this->render("@EXGrumpy/Forum/legal.html.twig");
+	}
+
 }
