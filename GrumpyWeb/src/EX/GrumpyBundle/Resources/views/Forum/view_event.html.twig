@@ -63,7 +63,7 @@
     {% if is_liked == true %}
       <a class="btn btn-primary" href="#">Vous aimez cet évènement  <span class="badge badge-light">{{ like_count }}</span></a>
     {% else %}
-      <a class="btn btn-primary" href="{{ path('ex_grumpy_like', {'event_id': event_id}) }}">Like  <span class="badge badge-light">{{ like_count }}</span></a>
+      <a class="btn btn-primary" href="{{ path('ex_grumpy_like', {'event_id': event_id}) }}">Like  <span class="badge badge-primary">{{ like_count }}</span></a>
     {% endif %}
 
     {% if is_subscribed == true %}

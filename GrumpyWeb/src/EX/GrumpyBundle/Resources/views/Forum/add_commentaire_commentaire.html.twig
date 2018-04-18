@@ -1,4 +1,20 @@
+{% extends "@EXGrumpy/layout.html.twig" %}
+
+{% block title %}
+	Proposition événement - {{ parent() }}
+{% endblock %}
+
+{% block ocplatform_body %}
+
+<div class="row">
+	<div class="col-md-3"></div>
+	<div class="col-md-6">
+		<br />
 {{ form_start(form) }}
-    {{ form_row(form.contenu) }}
-    <button type="submit">Envoyer le commentaire</button>
+    {{ form_row(form.contenu, {'attr':{'class':'form-control', 'placeholder':'Ecrire ici...'}})}}
+    <br />
+    <button class="btn btn-primary float-right" type="submit">Envoyer le commentaire</button>
 {{ form_end(form) }}
+</div>
+</div>
+{% endblock %}
