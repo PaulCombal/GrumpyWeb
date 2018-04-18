@@ -38,7 +38,8 @@ class ShopController extends Controller
 				"price" => $product->getPrix() . '€',
 				"description" => $product->getDescription(),
 				"category" => $product->getCategorie(),
-				"chemin_image" => "http://via.placeholder.com/350x150"
+				"chemin_image" => "http://via.placeholder.com/350x150",
+				"id" => $product->getId()
 			];
 		}
 
