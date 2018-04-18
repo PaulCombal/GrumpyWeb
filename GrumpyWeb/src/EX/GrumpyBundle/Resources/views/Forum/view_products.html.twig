@@ -17,14 +17,12 @@
 
 <div class="row">
 	<div class="col-md-3">
-		<h1 id="hautdepage" class="titre">La Boutique</h1>
+		<h1 class="titre">La Boutique</h1>
 		<div class="liste-group">
-			<a href="#" class="list-group-item">Mon panier</a>
-			<a href="../Categorie/categorie.html" class="list-group-item">Cat&eacute;gorie 1</a>
-			<a href="../Categorie/categorie.html" class="list-group-item">Cat&eacute;gorie 2</a>
-			<a href="../Categorie/categorie.html" class="list-group-item">Cat&eacute;gorie 3</a>
-			<a href="../Categorie/categorie.html" class="list-group-item">Cat&eacute;gorie 4</a>
-	</div>
+			<a href="#" class="list-group-item active"><i class="fas fa-shopping-basket"></i> Mon panier</a>
+			<span class="list-group-item">Filtrer par catégorie:</span>
+		</div>
+
 		<form>
 			<div class="form-group">
 				<input type="search" id="recherche" class="form-control ui-widget" placeholder="Recherche">
@@ -110,25 +108,73 @@
 <script>
   var x = $("#all_prods .card");
   var input = $("#recherche");
+  var list = $(".liste-group");
   var all_names = [];
+  var all_cats = [];
 
+  // Fill names and categories
   x.each(function(){
 	all_names.push($(this).find('.card-title').text());
+	all_cats.push($(this).find('.cat').text());
   });
 
+  // Filter names and categories to have unique values only
+  all_names = $.unique(all_names);
+  all_cats = $.unique(all_cats);
+
+  // Fill the categories list on the page
+  $(all_cats).each(function(i, e){
+  	list.append('<a href="#" class="list-group-item">' + e + '</a>');
+  	list.find('a').last().click(function(){
+  		curr_sel = $('.list-group-item-primary');
+  		if (curr_sel != null) {
+  			if ($(curr_sel).text() != $(this).text()) {
+  				$(curr_sel).toggleClass('list-group-item-primary');
+  			}
+  			else {
+  				// On a déséléctionné la catégorie active
+  				$(this).toggleClass('list-group-item-primary');
+  				x.each(function(){
+  					$(this).parent().show();
+  				});
+  				return;
+  			}
+  		}
+
+  		$(this).toggleClass('list-group-item-primary');
+  		input.val("");
+  		var cat_filter = $(this).text();
+
+	  	x.each(function(){
+	  		cat = $(this).find('.cat').text();
+	  		$(this).parent().hide();
+	  		if(cat === cat_filter) {
+	  			$(this).parent().show();
+	  		}
+	  	});
+  	});
+  });
+
+  // Enable autocompletion
   $( function() {
-    $( "#recherche" ).autocomplete({
+    input.autocomplete({
       source: all_names
     });
   });
 
-  input.on('input', ()=>{
+  // Enable results adjustments 
+  input.on('input', () => {
   	txt = input.val().toLowerCase();
   	x.each(function(){
-  		cat = $(this).find('.card-title').text().toLowerCase();
-  		$(this).hide();
-  		if(cat.includes(txt)) {
-  			$(this).show();
+  		cat_sel = $('.list-group-item-primary');
+  		if (cat_sel != null) {
+  			$(cat_sel).toggleClass('list-group-item-primary');
+  		}
+
+  		title = $(this).find('.card-title').text().toLowerCase();
+  		$(this).parent().hide();
+  		if(title.includes(txt)) {
+  			$(this).parent().show();
   		}
   	});
   });
