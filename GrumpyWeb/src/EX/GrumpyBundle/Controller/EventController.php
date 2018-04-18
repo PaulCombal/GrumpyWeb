@@ -172,7 +172,8 @@ class EventController extends Controller
 				"repetition" => "Tous les " . $event->getRepetition() . " jours",
 				"description" => $event->getDescription(),
 				"statut" => $event->getStatut(),
-				"chemin_image" => $event->getCheminImage()
+				"chemin_image" => $event->getCheminImage(),
+				"id" => $event->getId()
 			];
 		}
 
