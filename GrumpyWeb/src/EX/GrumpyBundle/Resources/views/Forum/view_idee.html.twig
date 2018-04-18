@@ -6,6 +6,11 @@
   Boîte à idées - {{ parent() }}
 {% endblock %}
 
+ {% block stylesheets %}
+  {{parent()}}
+  <link href="{{ asset('css/idee.css') }}" rel="stylesheet">
+ {% endblock %}
+
 {% block ocplatform_body %}
 <!-- Page Heading -->
 <h1 class="my-4" id="titre">
@@ -21,7 +26,7 @@
 	{% for event in events %}
     <div class="row">
   		<div class="col-md-4">
-  		  	<img alt="event" src="{{ event.chemin_image }}" />
+  		  	<img class="image" alt="event" src="{{ event.chemin_image }}" />
   		</div>
   		<div class="col-md-8">
   			<h4 class="font-weight-bold">

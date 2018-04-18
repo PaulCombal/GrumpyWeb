@@ -8,7 +8,9 @@
 
  {% block stylesheets %}
 	{{parent()}}
-	 <link href="{{ asset('css/produit.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/produit.css') }}" rel="stylesheet">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  	<link rel="stylesheet" href="/resources/demos/style.css">
  {% endblock %}
 
 {% block ocplatform_body %}
@@ -40,4 +42,27 @@
   		</div>
 	</div>
 </div>
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+  $( function() {
+    var availableRecherche = [
+      "T-shirt",
+      "Pantalon",
+      "Goddies",
+      "Porte clés",
+      "BDE",
+      "Cesi",
+      "Boissons",
+      "Contact",
+      "Produit",
+      "Nourriture"
+    ];
+    $( "#recherche" ).autocomplete({
+      source: availableRecherche
+    });
+  } );
+  </script>
 {% endblock %}
