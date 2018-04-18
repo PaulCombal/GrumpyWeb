@@ -82,62 +82,24 @@
 	<div class="col-md-9">
 		<h4 id="less">Tous les produits :</h4>
 		<div class="row">
+			{% for product in products %}
 			<div class="col-md-4">
 				<div class="card h-100">
-					<a href="#"><img class="card-img-top" src="{{asset('img/produit.png') }}" alt></a>
+					<a href="{{ path('ex_grumpy_view_product', {'product_id': product.id}) }}"><img class="card-img-top" src="{{asset('img/produit.png') }}" alt="produit"></a>
 					<div class="card-body">
-						<h4 class="card-title"><a href="#">Produit 1</a></h4>
+						<h4 class="card-title"><a href="{{ path('ex_grumpy_view_product', {'product_id': product.id}) }}">{{ product.name }}</a></h4>
 						<h5>
-							Prix
+							{{ product.price }}
 						</h5>
 						<p class="card-text">
-							Descrption du produit
+							{{ product.description }}
+							<br />
+							{{ product.category }}
 						</p>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-4">
-				<div class="card h-100">
-					<a href="#"><img class="card-img-top" src="{{asset('img/produit.png') }}" alt></a>
-					<div class="card-body">
-						<h4 class="card-title"><a href="#">Produit 2</a></h4>
-						<h5>
-							Prix
-						</h5>
-						<p class="card-text">
-							Descrption du produit
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="card h-100">
-					<a href="#"><img class="card-img-top" src="{{asset('img/produit.png') }}" alt></a>
-					<div class="card-body">
-						<h4 class="card-title"><a href="#">Produit 3</a></h4>
-						<h5>
-							Prix
-						</h5>
-						<p class="card-text">
-							Descrption du produit
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="card h-100">
-					<a href="#"><img class="card-img-top" src="{{asset('img/produit.png') }}" alt></a>
-					<div class="card-body">
-						<h4 class="card-title"><a href="#">Produit 4</a></h4>
-						<h5>
-							Prix
-						</h5>
-						<p class="card-text">
-							Descrption du produit
-						</p>
-					</div>
-				</div>
-			</div>
+			{% endfor %}
 		</div>
 	</div>
 </div>
