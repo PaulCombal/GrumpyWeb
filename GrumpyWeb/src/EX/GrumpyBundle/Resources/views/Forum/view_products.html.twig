@@ -81,7 +81,7 @@
 	<div class="col-md-3"></div>
 	<div class="col-md-9">
 		<h4 id="less">Tous les produits :</h4>
-		<div class="row">
+		<div class="row" id="all_prods">
 			{% for product in products %}
 			<div class="col-md-4">
 				<div class="card h-100">
@@ -94,7 +94,7 @@
 						<p class="card-text">
 							{{ product.description }}
 							<br />
-							{{ product.category }}
+							<span class="cat">{{ product.category }}</span>
 						</p>
 					</div>
 				</div>
@@ -132,5 +132,19 @@
       source: availableRecherche
     });
   } );
+
+  x = $("#all_prods .card");
+  input = $("#recherche");
+  input.on('input', ()=>{
+  	txt = input.val().toLowerCase();
+  	x.each(function(){
+  		cat = $(this).find('.card-title').text().toLowerCase();
+  		$(this).hide();
+  		if(cat.includes(txt)) {
+  			$(this).show();
+
+  		}
+  	});
+  });
   </script>
 {% endblock %}
