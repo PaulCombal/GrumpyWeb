@@ -70,21 +70,6 @@ class EventController extends Controller
 		$commentaire->setTypeContenu($cat_comment);
 
 
-		$likeExist = null;
-
-		$likeUtilisateur = $this->getDoctrine()
-			->getRepository(Commentaire::class)
-			->findBy
-			(
-				[ 'idUtilisateur' => $user, 'typeContenu' => $cat_comment, 'idCommentaire' => $event_id ],
-				null,
-				1,
-				0);
-
-				foreach ($likeUtilisateur as $like) {
-					$likeExist = $like->getId();
-				}
-
 
 		$form = $this->createForm(CommentaireType::class, $commentaire);
 		$form->handleRequest($request);
@@ -98,7 +83,7 @@ class EventController extends Controller
 			// ... do any other work - like sending them an email, etc
 			// maybe set a "flash" success message for the user
 
-			return $this->redirectToRoute('ex_grumpy_view_event_event', ['event_id' => $event_id]);
+			return $this->redirectToRoute('ex_grumpy_view_event', ['event_id' => $event_id]);
 		}
 
 		switch ($cat_comment) {
@@ -110,7 +95,7 @@ class EventController extends Controller
 					$entityManager = $this->getDoctrine()->getManager();
 					$entityManager->persist($commentaire);
 					$entityManager->flush();
-					return $this->redirectToRoute('ex_grumpy_view_event_event', ['event_id' => $event_id]);
+					return $this->redirectToRoute('ex_grumpy_view_event', ['event_id' => $event_id]);
 				}
 				break;
 			case 'image':
