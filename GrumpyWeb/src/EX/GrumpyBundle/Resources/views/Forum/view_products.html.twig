@@ -108,33 +108,20 @@
 {{ parent() }}
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-  $( function() {
-    var availableRecherche = [
-      "T-shirt",
-      "Pantalon",
-      "Goddies",
-      "Porte clés",
-      "BDE",
-      "Cesi",
-      "Boissons",
-      "Contact",
-      "Produit",
-      "Nourriture",
-      "Boutique",
-      "Evènements",
-      "Filtre",
-      "Catégorie",
-      "Nanterre",
-      "Best-sellers",
-      "Mode"
-    ];
-    $( "#recherche" ).autocomplete({
-      source: availableRecherche
-    });
-  } );
+  var x = $("#all_prods .card");
+  var input = $("#recherche");
+  var all_names = [];
 
-  x = $("#all_prods .card");
-  input = $("#recherche");
+  x.each(function(){
+	all_names.push($(this).find('.card-title').text());
+  });
+
+  $( function() {
+    $( "#recherche" ).autocomplete({
+      source: all_names
+    });
+  });
+
   input.on('input', ()=>{
   	txt = input.val().toLowerCase();
   	x.each(function(){
@@ -142,9 +129,9 @@
   		$(this).hide();
   		if(cat.includes(txt)) {
   			$(this).show();
-
   		}
   	});
   });
+
   </script>
 {% endblock %}
