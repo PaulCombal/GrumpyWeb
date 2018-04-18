@@ -6,6 +6,11 @@
   Evénements - {{ parent() }}
 {% endblock %}
 
+{% block stylesheets %}
+{{parent()}}
+    <link href="{{ asset('css/event.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block ocplatform_body %}
 
 <!--Heading -->
@@ -19,20 +24,20 @@
 <!-- Portfolio Item Row -->
 <div class="row">
 
-  <div class="col-md-8">
+  <div class="col-md-5">
     <img class="img-fluid" src="{{ chemin_image }}" alt="soiree">
   </div>
 
-  <div class="col-md-4">
+  <div class="col-md-7">
     <h3 class="my-3">Description :</h3>
     <p>
       {{ description }}
     </p>
     <p>
-      Participation: {{ price }}€
+      Participation: {{ price }} €
     </p>
     <p>
-      Commence le {{ start_date|date('Y-m-d') }}
+      Commence le: {{ start_date|date('Y-m-d') }}
     </p>
     <p>
       Statut de l'event: {{ statut }}
@@ -85,5 +90,4 @@
     </div>
   {% endfor %}
 </div>
-
 {% endblock %}

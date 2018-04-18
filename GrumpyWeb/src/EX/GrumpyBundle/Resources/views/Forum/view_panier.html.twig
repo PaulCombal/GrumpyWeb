@@ -3,22 +3,97 @@
 {% extends "@EXGrumpy/layout.html.twig" %}
 
 {% block title %}
-  Évènements - {{ parent() }}
+  Panier - {{ parent() }}
 {% endblock %}
 
 {% block ocplatform_body %}
 
   <h1>Panier</h1>
 
-  {% for produit in produits %}
-
-    Nom du produit : {{ produit.nom_du_produit }} <br />
-    Description : {{ produit.description }} <br />
-    Catégories : {{ produit.categorie}} <br />
-    Prix : {{ produit.prix }} <br />
-    Quantité : {{ produit.quantite }} <br /><br />
-    
-  {% endfor %}
-
-  <hr />
+  <body>
+    <!--Navbar-->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary mb-3">
+      <a class="navbar-brand" href="../Index/index.html#">
+        <img src="../logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <b>BDE CESI Nanterre</b>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="../Boutique/boutique.html"><span class="glyphicon glyphicon-shopping-cart"></span> Boutique</a>
+          <a class="nav-item nav-link" href="../EvPasse/EvPasse.html"><span class="glyphicon glyphicon-camera"></span> &Eacute;v&eacutenements pass&eacutes</a>
+          <a class="nav-item nav-link" href="../EvVenir/EvVenir.html"><span class="glyphicon glyphicon-calendar"></span> &Eacute;v&eacutenements &agrave; venir</a>
+          <a class="nav-item nav-link" href="../Idees/idees.html"><span class="glyphicon glyphicon-bullhorn"></span> Boite &agrave; id&eacutees</a>
+          <form class="navbar-form navbar-right inline-form">
+            <div class="form-group">
+              <input type="search" id="recherche" class="ui-widget" placeholder="Recherche">
+              <button type="submit" class="btn btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Chercher</button>
+            </div>
+          </form>
+                    <a class="nav-item nav-link" href="../Connexion/connexion.html#"><span class="glyphicon glyphicon-user"></span> Se connecter</a>
+                    <a class="nav-item nav-link" href="../panier/panier.html"><span class="glyphicon glyphicon-barcode"></span> Mon Panier</a>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3">
+          <h1 id="hautdepage" class="titre">Mon Panier</h1>
+        </div>
+        <div class="col-md-9">
+          <h4 id="best">Produits :</h4>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card h-100">
+                <a href="../Produits/produit.html"><img class="card-img-top" src="../produit.png" alt></a>
+                <div class="card-body">
+                  <h4 class="card-title"><a href="../Produits/produit.html">Produit 1</a></h4>
+                  <h5>
+                    Prix
+                  </h5>
+                  <p class="card-text">
+                    Descrption du produit
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card h-100">
+                <a href="../Produits/produit.html"><img class="card-img-top" src="../produit.png" alt></a>
+                <div class="card-body">
+                  <h4 class="card-title"><a href="../Produits/produit.html">Produit 2</a></h4>
+                  <h5>
+                    Prix
+                  </h5>
+                  <p class="card-text">
+                    Descrption du produit
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card h-100">
+                <a href="../Produits/produit.html"><img class="card-img-top" src="../produit.png" alt></a>
+                <div class="card-body">
+                  <h4 class="card-title"><a href="../Produits/produit.html">Produit 3</a></h4>
+                  <h5>
+                    Prix
+                  </h5>
+                  <p class="card-text">
+                    Descrption du produit
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+            <footer class="py-5 bg-primary" id="foot">
+            <div class="container">
+                <p class="m-0 text-center text-white"><a href="../Mentions/mentions.html" clas="text-left"> Mentions l&eacutegales </a>|<a href="../Mentions/mentions.html" clas="text-center"> Contact </a>|<a href="#hautdepage" clas="text-right"> Haut de page </a></p>
+            </div>
+    </footer>
+</html>
 {% endblock %}
