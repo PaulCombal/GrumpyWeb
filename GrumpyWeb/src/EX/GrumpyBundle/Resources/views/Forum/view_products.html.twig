@@ -124,7 +124,7 @@
 
   // Fill the categories list on the page
   $(all_cats).each(function(i, e){
-  	list.append('<a href="#" class="list-group-item">' + e + '</a>');
+  	list.append('<a href="javascript:void(0)" class="list-group-item">' + e + '</a>');
   	list.find('a').last().click(function(){
   		curr_sel = $('.list-group-item-primary');
   		if (curr_sel != null) {
@@ -132,7 +132,7 @@
   				$(curr_sel).toggleClass('list-group-item-primary');
   			}
   			else {
-  				// On a déséléctionné la catégorie active
+  				// Currently selectionned category deselectionned
   				$(this).toggleClass('list-group-item-primary');
   				x.each(function(){
   					$(this).parent().show();
