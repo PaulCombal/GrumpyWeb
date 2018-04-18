@@ -98,7 +98,7 @@ class EventController extends Controller
 			// ... do any other work - like sending them an email, etc
 			// maybe set a "flash" success message for the user
 
-			return $this->redirectToRoute('ex_grumpy_view_event', ['event_id' => $event_id]);
+			return $this->redirectToRoute('ex_grumpy_view_event_event', ['event_id' => $event_id]);
 		}
 
 		switch ($cat_comment) {
@@ -110,7 +110,7 @@ class EventController extends Controller
 					$entityManager = $this->getDoctrine()->getManager();
 					$entityManager->persist($commentaire);
 					$entityManager->flush();
-					return $this->redirectToRoute('ex_grumpy_view_event', ['event_id' => $event_id]);
+					return $this->redirectToRoute('ex_grumpy_view_event_event', ['event_id' => $event_id]);
 				}
 				break;
 			case 'image':
@@ -220,6 +220,26 @@ class EventController extends Controller
 				0
 			);
 
+		$isLikedAlready = $this->getDoctrine()
+			->getRepository(Commentaire::class)
+			->findBy
+			(
+				[ 'idEvenement' => $event_id, 'idUtilisateur' => $user->getId(), 'typeContenu' => 'like' ],
+				null,
+				1,
+				0
+			);
+
+		$numlikes = $this->getDoctrine()
+			->getRepository(Commentaire::class)
+			->findBy
+			(
+				[ 'idEvenement' => $event_id, 'typeContenu' => 'like' ],
+				null,
+				null,
+				0
+			);
+
 		$event = $this->getDoctrine()
 			->getRepository(Evenement::class)
 			->find($event_id);
@@ -257,6 +277,8 @@ class EventController extends Controller
 			"chemin_image" => $event->getCheminImage(),
 			"event_id" => $event_id,
 			"is_subscribed" => sizeof($isSubscribedAlready) > 0,
+			"is_liked" => sizeof($isLikedAlready) > 0,
+			"like_count" => sizeof($isLikedAlready),
 			"commentaires" => $temp
 		];
 
@@ -284,7 +306,7 @@ class EventController extends Controller
 			);
 
 		if (sizeof($isSubscribedAlready) > 0) {
-			return $this->redirectToRoute('ex_grumpy_view', ['event_id' => $event_id]);
+			return $this->redirectToRoute('ex_grumpy_view_event', ['event_id' => $event_id]);
 		}
 
 		$event = $this->getDoctrine()
@@ -300,8 +322,44 @@ class EventController extends Controller
 		$entityManager->flush();
 
 
-		return $this->redirectToRoute('ex_grumpy_view', ['event_id' => $event_id]);
+		return $this->redirectToRoute('ex_grumpy_view_event', ['event_id' => $event_id]);
+	}
 
+	public function like_eventAction($event_id) {
+		$user = $this->getUser();
+		if ($user == null) {
+			return $this->redirectToRoute('fos_user_security_login');
+		}
+
+		$isLikedAlready = $this->getDoctrine()
+			->getRepository(Commentaire::class)
+			->findBy
+			(
+				[ 'idEvenement' => $event_id, 'idUtilisateur' => $user->getId(), 'typeContenu' => 'like' ],
+				null,
+				1,
+				0
+			);
+
+		if (sizeof($isLikedAlready) > 0) {
+			return $this->redirectToRoute('ex_grumpy_view_event', ['event_id' => $event_id]);
+		}
+
+		$event = $this->getDoctrine()
+			->getRepository(Evenement::class)
+			->find($event_id);
+
+		$commentaire = new Commentaire();
+		$commentaire->setIdEvenement($event);
+		$commentaire->setIdUtilisateur($user);
+		$commentaire->setTypeContenu('like');
+
+		$entityManager = $this->getDoctrine()->getManager();
+		$entityManager->persist($commentaire);
+		$entityManager->flush();
+
+
+		return $this->redirectToRoute('ex_grumpy_view_event', ['event_id' => $event_id]);
 	}
 
 	public function vote_ideaAction()

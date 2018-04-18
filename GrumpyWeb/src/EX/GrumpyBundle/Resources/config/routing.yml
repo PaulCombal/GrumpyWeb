@@ -8,6 +8,12 @@ ex_grumpy_subscribe:
     requirements:
         event_id: '\d+'
 
+ex_grumpy_like:
+    path:     /like_event/{event_id}
+    defaults: { _controller: EXGrumpyBundle:Event:like_event }
+    requirements:
+        event_id: '\d+'
+
 ex_grumpy_boite_idees:
     path:     /boite_idees
     defaults: { _controller: EXGrumpyBundle:Event:view_idee }
