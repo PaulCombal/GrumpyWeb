@@ -57,6 +57,10 @@ ex_grumpy_add_to_panier:
     requirements:
         event_id: '\d+'
 
-ex_grump_view_panier:
+ex_grumpy_view_panier:
     path:    /view_panier
     defaults: { _controller: EXGrumpyBundle:Shop:view_panier }
+
+ex_grumpy_validate_commande:
+    path:    /validate_commande
+    defaults: { _controller: EXGrumpyBundle:Shop:validate_commande }

@@ -128,6 +128,8 @@ class ShopController extends Controller
 	}
 
 
+
+
 	public function view_panierAction(Request $request)
 	{
 		$user = $this->getUser();
@@ -182,25 +184,34 @@ class ShopController extends Controller
 
 
 
-	public function add_commandeAction(Request $request)
+
+
+	public function validate_commandeAction(Request $request)
 	{
 
-		$commande = new Commande();
-		$form = $this->createForm(CommandeType::class, $commande);
-		$form->handleRequest($request);
-
-		if ($form->isSubmitted() && $form->isValid()) {
-
-			$entityManager = $this->getDoctrine()->getManager();
-			$entityManager->persist($commande);
-			$entityManager->flush();
-
-			return $this->redirectToRoute('ex_grumpy_add_commande');
+		$user = $this->getUser();
+		if ($user == null) {
+			return $this->redirectToRoute('fos_user_security_login');
 		}
 
-		return $this->render(
-			'@EXGrumpy/Forum/add_commande.html.twig',
-			['form' => $form->createView()]
-		);
+		$paniers = $this->getDoctrine()
+			->getRepository(Panier::class)
+			->findBy
+			(
+				[ 'idUtilisateur' => $user],
+				null,
+				50,
+				0
+			);
+		$entityManager = $this->getDoctrine()->getManager();
+		
+		foreach ($paniers as &$panier) {
+			$entityManager->remove($panier);
+		}
+		$entityManager->flush();
+
+		return $this->redirectToRoute('ex_grumpy_view_panier');
+	
+		
 	}
 }
