@@ -8,7 +8,58 @@
 
 {% block ocplatform_body %}
 
-  <h1>Events officiels</h1>
+<!-- Page Heading -->
+<h1 class="my-4" id="titre">
+  Évènements officiels BDE
+  <h2>
+    <small>Les idées officielles et approuvées par le bureau !</small>
+  </h2>
+</h1>
+<hr />
 
- 
+<!-- Project -->
+<div class ="container">
+  {% for event in events %}
+    <div class="row">
+      <div class="col-md-4">
+          <img class="image" alt="event" src="{{ event.chemin_image }}" />
+      </div>
+      <div class="col-md-8">
+        <h4 class="font-weight-bold">
+          <a href="{{ path('ex_grumpy_view_event', {'event_id' : event.id}) }}">{{ event.title }}</a>
+        </h4>
+        <h5>Prix : {{ event.price }} €</h5>
+        <p class="font-weight-light">{{ event.description }}</p>
+        <p>Le : {{ event.start_date|date('Y-m-d') }}</p>
+        <p>Quand ? {{ event.repetition }}</p>
+      </div>
+    </div>
+    <hr />
+  {% endfor %}
+</div>
+
+<!-- Pagination -->
+<ul class="pagination justify-content-center">
+  <li class="page-item">
+    <a class="page-link" href="#" aria-label="Previous">
+      <span aria-hidden="true">«</span>
+      <span class="sr-only">Previous</span>
+    </a>
+  </li>
+  <li class="page-item">
+    <a class="page-link" href="#">1</a>
+  </li>
+  <li class="page-item">
+    <a class="page-link" href="#">2</a>
+  </li>
+  <li class="page-item">
+    <a class="page-link" href="#">3</a>
+  </li>
+  <li class="page-item">
+    <a class="page-link" href="#" aria-label="Next">
+      <span aria-hidden="true">»</span>
+      <span class="sr-only">Next</span>
+    </a>
+  </li>
+</ul>
 {% endblock %}

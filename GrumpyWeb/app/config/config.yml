@@ -27,6 +27,7 @@ easy_admin:
     entities:
         - EX\GrumpyBundle\Entity\Utilisateur
         - EX\GrumpyBundle\Entity\Evenement
+        - EX\GrumpyBundle\Entity\Produit
 
 framework:
     #esi: ~
