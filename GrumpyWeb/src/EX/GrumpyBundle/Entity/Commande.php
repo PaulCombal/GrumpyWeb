@@ -41,6 +41,15 @@ class Commande
      */
     private $idProduit;
 
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="statutCommande", type="string", length=25, nullable=true)
+     */
+    private $statutCommande;
+
+
+
 
 
     /**
@@ -99,5 +108,29 @@ class Commande
     public function getIdProduit()
     {
         return $this->idProduit;
+    }
+
+    /**
+     * Set statutCommande.
+     *
+     * @param string|null $statutCommande
+     *
+     * @return Commande
+     */
+    public function setStatutCommande($statutCommande = null)
+    {
+        $this->statutCommande = $statutCommande;
+
+        return $this;
+    }
+
+    /**
+     * Get statutCommande.
+     *
+     * @return string|null
+     */
+    public function getStatutCommande()
+    {
+        return $this->statutCommande;
     }
 }

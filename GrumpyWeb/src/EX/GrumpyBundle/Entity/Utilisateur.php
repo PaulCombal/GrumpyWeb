@@ -47,7 +47,6 @@ class Utilisateur extends BaseUser
     protected $idPanier;
 
 
-
     /**
      * Set nom.
      *

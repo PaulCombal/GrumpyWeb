@@ -31,6 +31,16 @@ class Panier
      */
     private $idUtilisateur;
 
+    /**
+     * @var \Produit
+     *
+     * @ORM\ManyToOne(targetEntity="Produit")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_produit", referencedColumnName="id")
+     * })
+     */
+    private $idProduit;
+
 
 
     /**
@@ -65,5 +75,29 @@ class Panier
     public function getIdUtilisateur()
     {
         return $this->idUtilisateur;
+    }
+
+    /**
+     * Set idProduit.
+     *
+     * @param \EX\GrumpyBundle\Entity\Produit|null $idProduit
+     *
+     * @return Panier
+     */
+    public function setIdProduit(\EX\GrumpyBundle\Entity\Produit $idProduit = null)
+    {
+        $this->idProduit = $idProduit;
+
+        return $this;
+    }
+
+    /**
+     * Get idProduit.
+     *
+     * @return \EX\GrumpyBundle\Entity\Produit|null
+     */
+    public function getIdProduit()
+    {
+        return $this->idProduit;
     }
 }

@@ -1,0 +1,24 @@
+{# src/EX/GrumpyWebBundle/Resources/views/Forum/view_idee.html.twig #}
+
+{% extends "@EXGrumpy/layout.html.twig" %}
+
+{% block title %}
+  Évènements - {{ parent() }}
+{% endblock %}
+
+{% block ocplatform_body %}
+
+  <h1>Panier</h1>
+
+  {% for produit in produits %}
+
+    Nom du produit : {{ produit.nom_du_produit }} <br />
+    Description : {{ produit.description }} <br />
+    Catégories : {{ produit.categorie}} <br />
+    Prix : {{ produit.prix }} <br />
+    Quantité : {{ produit.quantite }} <br /><br />
+    
+  {% endfor %}
+
+  <hr />
+{% endblock %}

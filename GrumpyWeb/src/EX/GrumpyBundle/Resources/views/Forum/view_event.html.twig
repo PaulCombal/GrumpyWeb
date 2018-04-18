@@ -58,8 +58,8 @@
     Réagir
   </h3>
   <div>
-    <a class="btn btn-primary" href="#">Ajoute ta photo</a>
-    <a class="btn btn-primary" href="#">Commente l'évènement</a>
+    <a class="btn btn-primary" href="{{ path('ex_grumpy_add_comment', {'event_id': event_id, 'cat_comment': 'image' }) }}">Ajoute ta photo</a>
+    <a class="btn btn-primary" href="{{ path('ex_grumpy_add_comment', {'event_id': event_id, 'cat_comment': 'commentaire' }) }}">Commente l'évènement</a>
     <a class="btn btn-primary" href="#">LIKE</a>
     {% if is_subscribed == true %}
       <a class="btn btn-primary" href="#">Vous êtes inscrit!</a>
@@ -78,8 +78,16 @@
   <h3 class="my-4 col-md-12"> Commentaires et photos: </h3>
 
   {% for commentaire in commentaires %}
-    {{commentaire.poster_name}}: {{commentaire.contenu}}
-    <br />
+    <div class="col-md-12">
+      {{commentaire.poster_name}}: 
+      {% if commentaire.type == 'image' %}
+        <img src="{{commentaire.contenu}}" alt="image commentaire" />
+        <br />
+      {% elseif commentaire.type == 'commentaire' %}
+        {{commentaire.contenu}}
+      {% endif %}
+      <br />
+    </div>
   {% endfor %}
 </div>
 {% endblock %}

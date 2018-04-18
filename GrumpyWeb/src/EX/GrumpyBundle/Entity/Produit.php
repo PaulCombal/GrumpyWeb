@@ -24,14 +24,14 @@ class Produit
     /**
      * @var string|null
      *
-     * @ORM\Column(name="nom", type="string", length=25, nullable=true)
+     * @ORM\Column(name="nom", type="string", length=250, nullable=true)
      */
     private $nom;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="description", type="string", length=25, nullable=true)
+     * @ORM\Column(name="description", type="string", length=2500, nullable=true)
      */
     private $description;
 
@@ -51,6 +51,19 @@ class Produit
 
 
 
+     /**
+     * Set nom.
+     *
+     * @param int|null $id
+     *
+     * @return Produit
+     */
+    public function setId($id = null)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
     /**
      * Get id.
      *
