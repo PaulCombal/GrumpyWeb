@@ -194,6 +194,8 @@ class ShopController extends Controller
 			return $this->redirectToRoute('fos_user_security_login');
 		}
 
+		$produit = new Produit();
+
 		$paniers = $this->getDoctrine()
 			->getRepository(Panier::class)
 			->findBy
@@ -203,6 +205,16 @@ class ShopController extends Controller
 				50,
 				0
 			);
+
+/*
+		foreach ($panier as $item) {
+			$commande = new Commande();
+			$commande->setStatutCommande("en cours");
+			$commande->setIdPanier($item->getId());
+			$commande->setIdProduit($item->getIdProduit());
+		
+		}
+*/
 		$entityManager = $this->getDoctrine()->getManager();
 		
 		foreach ($paniers as &$panier) {

@@ -76,7 +76,7 @@ class EventController extends Controller
 			->getRepository(Commentaire::class)
 			->findBy
 			(
-				[ 'idUtilisateur' => $user, 'typeContenu' => $cat_comment ],
+				[ 'idUtilisateur' => $user, 'typeContenu' => $cat_comment, 'idCommentaire' => $event_id ],
 				null,
 				1,
 				0);
@@ -172,14 +172,14 @@ class EventController extends Controller
 		if ($user == null) {
 			return $this->redirectToRoute('fos_user_security_login');
 		}
-
+		
 		$events = $this->getDoctrine()
 			->getRepository(Evenement::class)
 			->findBy
 			(
 				[ 'statut' => 'officiel' ],
 				null,
-				10,
+				50,
 				0
 			);
 
