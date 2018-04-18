@@ -1,0 +1,29 @@
+
+.titre
+{
+	margin-top: 2rem;
+    margin-bottom: 0.5rem
+}
+
+.col-md-9
+{
+	margin-top: 2rem;
+}
+
+.col-md-4
+{
+	margin-bottom: 2rem;
+}
+
+.form-group
+{
+	margin-top: 0.5rem;
+}
+
+.image
+{
+	max-width: 50%;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+}

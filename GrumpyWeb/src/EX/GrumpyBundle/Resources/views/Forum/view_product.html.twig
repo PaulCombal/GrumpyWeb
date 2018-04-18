@@ -6,10 +6,38 @@
   {{ name }} - {{ parent() }}
 {% endblock %}
 
+ {% block stylesheets %}
+	{{parent()}}
+	 <link href="{{ asset('css/produit.css') }}" rel="stylesheet">
+ {% endblock %}
+
 {% block ocplatform_body %}
 
-  <h2>{{ name }}</h2>
-  {{ description }} <br />
-  prix {{ price }} <br />
-  <img alt="product" src="{{ chemin_image }}" />
+<div class="row">
+	<div class="col-md-3">
+		<h1 id="hautdepage" class="titre">La Boutique</h1>
+		<div class="liste-group">
+			<a href="#" class="list-group-item">Mon panier</a>
+			<a href="../Categorie/categorie.html" class="list-group-item">Cat&eacute;gorie 1</a>
+			<a href="../Categorie/categorie.html" class="list-group-item">Cat&eacute;gorie 2</a>
+			<a href="../Categorie/categorie.html" class="list-group-item">Cat&eacute;gorie 3</a>
+		</div>
+		<form>
+			<div class="form-group">
+				<input type="search" id="recherche" class="form-control ui-widget" placeholder="Recherche">
+			</div>
+		</form>
+	</div>
+	<div class="col-md-9">
+		<div class="card mt-4">
+			<img class="image" alt="product" src="{{asset('img/produit.png') }}" />
+			<div class="card-body">
+  				<h2>{{ name }}</h2>
+  				<h5>Prix : {{ price }}</h5>
+  				<p>{{ description }}</p>
+  				<button type="submit" class="btn btn-primary btn-lg float-right"> Acheter</button>
+  			</div>
+  		</div>
+	</div>
+</div>
 {% endblock %}
