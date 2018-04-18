@@ -8,129 +8,74 @@
 
 {% block ocplatform_body %}
 
-<div class="container">
-  <div class="row">
-  <!-- Page Heading -->
-      <h1 class="my-4" id="titre">Nos &Eacute;v&eacutenements &agrave; venir<h3><small>Viens t'inscrire !</small></h3>
-                    </h1>
-                    <hr class="separation">
-                    <!-- Evenement du mois -->
-      <div class="row">
-          <!--<div class="alert alert-info" role="alert">-->
-        <div class="col-md-12" id="evdumois">
-            <img class="img-fluid rounded mb-3 mb-md-0" src="soiree.jpg" alt="soiree">
-        </div>
-        <div class="col-md-12">
-          <h3>L'&Eacute;v&eacutenement du mois</h3>
-          <p>description</p>
-            <h5 class="prix">Prix : Gratuit</h5>
-          <a class="btn btn-primary float-right" href="#">S'inscrire</a>
-            </div>
-      </div>
-      <!-- /.row -->
-      <hr class="separation">
-      <!-- Project One -->
-      <div class="row">
-        <div class="col-md-7">
-    
-            <img class="img-fluid rounded mb-3 mb-md-0" src="soiree.jpg" alt="soiree">
-        </div>
-        <div class="col-md-5">
-          <h3>&Eacute;v&eacutenement 1</h3>
-          <p>description</p>
-          <a class="btn btn-primary float-right" href="#">S'inscrire</a>
-        </div>
-      </div>
-      <!-- /.row -->
-      <hr>
-      <!-- Project Two -->
-      <div class="row">
-        <div class="col-md-7">
-   
-            <img class="img-fluid rounded mb-3 mb-md-0" src="soiree.jpg" alt="soiree">
-   
-        </div>
-        <div class="col-md-5">
-          <h3>&Eacute;v&eacutenement 2</h3>
-          <p>Description</p>
-          <a class="btn btn-primary float-right" href="#">S'inscrire</a>
-        </div>
-      </div>
-      <!-- /.row -->
-      <hr>
-      <!-- Project Three -->
-      <div class="row">
-        <div class="col-md-7">
-   
-            <img class="img-fluid rounded mb-3 mb-md-0" src="soiree.jpg" alt="soiree">
-    
-        </div>
-        <div class="col-md-5">
-          <h3>&Eacute;v&eacutenement 3</h3>
-          <p>Description</p>
-          <a class="btn btn-primary float-right" href="#">S'inscrire</a>
-        </div>
-      </div>
-      <!-- /.row -->
-      <hr>
-      <!-- Project Four -->
-      <div class="row">
+<!--Heading -->
+<h1 class="my-4" id="titre">{{ title }}
+  <h2>
+    <small>Ajoute tes photos !</small>
+  </h2>
+  <hr>
+</h1>
 
-        <div class="col-md-7">
+<!-- Portfolio Item Row -->
+<div class="row">
 
-            <img class="img-fluid rounded mb-3 mb-md-0" src="soiree.jpg" alt="soiree">
-       
-        </div>
-        <div class="col-md-5">
-          <h3>&Eacute;v&eacutenement 4</h3>
-          <p>Description</p>
-          <a class="btn btn-primary float-right" href="#">S'inscrire</a>
-        </div>
-      </div>
-      <!-- /.row -->
-      <hr>
-      <!-- Pagination -->
-      <ul class="pagination justify-content-center">
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Previous">
-            <span aria-hidden="true">«</span>
-            <span class="sr-only">Previous</span>
-          </a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">1</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">2</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">3</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Next">
-            <span aria-hidden="true">»</span>
-            <span class="sr-only">Next</span>
-          </a>
-        </li>
-      </ul>
+  <div class="col-md-8">
+    <img class="img-fluid" src="{{ chemin_image }}" alt="soiree">
+  </div>
 
-    </div>
-      </div>
+  <div class="col-md-4">
+    <h3 class="my-3">Description :</h3>
+    <p>
+      {{ description }}
+    </p>
+    <p>
+      Participation: {{ price }}€
+    </p>
+    <p>
+      Commence le {{ start_date|date('Y-m-d') }}
+    </p>
+    <p>
+      Statut de l'event: {{ statut }}
+    </p>
+    <p>
+      Fréquence de l'évènement: {{ repetition }}
+    </p>
+  </div>
 
-  <h2>{{ title }}</h2>
-  {{ description }} <br />
-  prix {{ price }} <br />
-  commence le {{ start_date|date('Y-m-d') }} <br />
-  repetition {{ repetition }}<br />
-  statut {{ statut }} <br />
-  <img alt="event" src="{{ chemin_image }}" /> <br />
-   {% for commentaire in commentaires %}
-    <br />{{commentaire.poster_name}} : {{commentaire.contenu}}
-  {% endfor %}
-  {% if is_subscribed == true %}
-  	Vous êtes inscrit à l'évènement
-  {% else %}
+</div>
+<!-- /.row -->
+
+<hr />
+
+<!-- Related Projects Row -->
+<div class="row">
+  <h3 class="my-4 col-md-12">
+    Réagir
+  </h3>
+  <div>
+    <a class="btn btn-primary" href="#">Ajoute ta photo</a>
+    <a class="btn btn-primary" href="#">Commente l'évènement</a>
+    <a class="btn btn-primary" href="#">LIKE</a>
+    {% if is_subscribed == true %}
+      <a class="btn btn-primary" href="#">Vous êtes inscrit!</a>
+    {% else %}
+      <a class="btn btn-primary" href="{{ path('ex_grumpy_subscribe', {'event_id': event_id}) }}">S'inscrire à l'évènement</a>
+    {% endif %}
+  </div>
+</div>
+<!-- /.row -->
+
+<hr />
+
+<!-- Commentaires -->
+
+<div class="row">
+  <h3 class="my-4 col-md-12"> Commentaires et photos: </h3>
+
+  {% for commentaire in commentaires %}
+    {{commentaire.poster_name}}: {{commentaire.contenu}}
     <br />
-  	<a href="{{ path('ex_grumpy_subscribe', {'event_id': event_id}) }}">S'inscrire à l'évènement</a>
-  {% endif %}
+  {% endfor %}
+</div>
+
 {% endblock %}
