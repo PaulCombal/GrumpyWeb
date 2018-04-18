@@ -24,7 +24,9 @@
   		  	<img alt="event" src="{{ event.chemin_image }}" />
   		</div>
   		<div class="col-md-8">
-  			<h4 class="font-weight-bold">{{ event.title }}</h4>
+  			<h4 class="font-weight-bold">
+          <a href="{{ path('ex_grumpy_view_event', {'event_id' : event.id}) }}">{{ event.title }}</a>
+        </h4>
   			<h5>Prix : {{ event.price }} €</h5>
   			<p class="font-weight-light">{{ event.description }}</p>
 	  		<p>Le : {{ event.start_date|date('Y-m-d') }}</p>
