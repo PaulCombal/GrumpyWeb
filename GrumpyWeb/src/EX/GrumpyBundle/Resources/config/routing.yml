@@ -50,3 +50,13 @@ ex_grumpy_view_product:
     defaults: { _controller: EXGrumpyBundle:Shop:view_product }
     requirements:
         event_id: '\d+'
+
+ex_grumpy_add_to_panier:
+    path:     /add_to_panier/{product_id}
+    defaults: { _controller: EXGrumpyBundle:Shop:add_to_panier }
+    requirements:
+        event_id: '\d+'
+
+ex_grump_view_panier:
+    path:    /view_panier
+    defaults: { _controller: EXGrumpyBundle:Shop:view_panier }

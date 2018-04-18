@@ -42,4 +42,62 @@ class UserGroupe
     private $idUtilisateur;
 
 
+
+    /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set idGroupe.
+     *
+     * @param \EX\GrumpyBundle\Entity\Groupe|null $idGroupe
+     *
+     * @return UserGroupe
+     */
+    public function setIdGroupe(\EX\GrumpyBundle\Entity\Groupe $idGroupe = null)
+    {
+        $this->idGroupe = $idGroupe;
+
+        return $this;
+    }
+
+    /**
+     * Get idGroupe.
+     *
+     * @return \EX\GrumpyBundle\Entity\Groupe|null
+     */
+    public function getIdGroupe()
+    {
+        return $this->idGroupe;
+    }
+
+    /**
+     * Set idUtilisateur.
+     *
+     * @param \EX\GrumpyBundle\Entity\Utilisateur|null $idUtilisateur
+     *
+     * @return UserGroupe
+     */
+    public function setIdUtilisateur(\EX\GrumpyBundle\Entity\Utilisateur $idUtilisateur = null)
+    {
+        $this->idUtilisateur = $idUtilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get idUtilisateur.
+     *
+     * @return \EX\GrumpyBundle\Entity\Utilisateur|null
+     */
+    public function getIdUtilisateur()
+    {
+        return $this->idUtilisateur;
+    }
 }

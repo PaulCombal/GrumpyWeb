@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use EX\GrumpyBundle\Entity\Produit;
 use EX\GrumpyBundle\Entity\Commande;
+use EX\GrumpyBundle\Entity\Panier;
 use EX\GrumpyBundle\Form\ProduitType;
 use Symfony\Component\Security\Http\Firewall\ContextListener;
 use Symfony\Component\HttpFoundation\Response;
@@ -100,6 +101,84 @@ class ShopController extends Controller
 
 
 
+
+
+	public function add_to_panierAction(Request $request, $product_id)
+	{
+		$produit = new Produit();
+		$panier = new Panier();
+		$user = $this->getUser();
+		if ($user == null) {
+			return $this->redirectToRoute('fos_user_security_login');
+		}
+
+		
+		$produit->setId($product_id);
+
+		
+		$panier->setIdProduit($produit);
+		$panier->setIdUtilisateur($user); 
+		
+
+		$entityManager = $this->getDoctrine()->getManager();
+		$entityManager->merge($panier);
+		$entityManager->flush();
+
+		return $this->redirectToRoute('ex_grumpy_view_products');
+	}
+
+
+	public function view_panierAction(Request $request)
+	{
+		$user = $this->getUser();
+		if ($user == null) {
+			return $this->redirectToRoute('fos_user_security_login');
+		}
+
+		$paniers = $this->getDoctrine()
+			->getRepository(Panier::class)
+			->findBy
+			(
+				[ 'idUtilisateur' => $user],
+				null,
+				50,
+				0
+			);
+
+		$idProduits = [];
+		foreach ($paniers as &$panier) {
+			$idProduits[] = $panier->getIdProduit();
+		}
+
+		$produits = $this->getDoctrine()
+			->getRepository(Produit::class)
+			->findByid($idProduits);
+
+
+
+		$temp = [];
+		foreach ($produits as &$produit) {
+			$temp[] = 
+			[
+				"nom_du_produit" => $produit->getNom(), 
+				"prix" => $produit->getPrix(), 
+				"description" => $produit->getDescription(),
+				"quantite" => count($this->getDoctrine()
+			->getRepository(Panier::class)
+			->findBy
+			(
+				["idProduit" => $produit->getId()],
+				null,
+				50,
+				0
+			)),
+				"categorie" => $produit->getCategorie(),
+			];
+		}
+
+		return $this->render('@EXGrumpy/Forum/view_panier.html.twig', ['produits' => $temp]);
+
+	}
 
 
 
