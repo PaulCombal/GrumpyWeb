@@ -1,20 +1,4 @@
 
-body
-{
-	height: 100%;
-	width: 100%;
-	font-family: 'Trebuchet MS', Helvetica, sans-serif;
-}
-
-.navbar{
-    z-index: 100;
-}
-
-.navbar-nav
-{
-    margin-top: 12px;
-}
-
 .inline-form input
 {
 	display: inline-block;
@@ -23,29 +7,25 @@ body
 
 .titre
 {
-	margin-top: 5rem;
+	margin-top: 2rem;
     margin-bottom: 0.5rem
+}
+
+.form-group
+{
+	margin-top: 0.5rem;
 }
 
 .col-md-9 #best
 {
-	margin-top: 7.5rem;
+	margin-top: 2.5rem;
 }
 
 .col-md-4
 {
-	margin-bottom: 2rem;
+	margin-bottom: 1rem;
 }
 
 .ui-autocomplete {
             z-index:2000;
         }
-
-#foot a
-{
-    color: #FFF;
-}
-#foot
-{
-    margin-top: 2em;
-}

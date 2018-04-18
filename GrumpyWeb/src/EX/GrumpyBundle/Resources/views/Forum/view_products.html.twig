@@ -6,27 +6,39 @@
   Boutique - {{ parent() }}
 {% endblock %}
 
-{% block ocplatform_body %}
+ {% block stylesheets %}
+	{{parent()}}
+	<link href="{{ asset('css/boutique.css') }}" rel="stylesheet">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  	<link rel="stylesheet" href="/resources/demos/style.css">
+ {% endblock %}
 
-  <h1>Boutique</h1>
+{% block ocplatform_body %}
 
 <div class="row">
 	<div class="col-md-3">
 		<h1 id="hautdepage" class="titre">La Boutique</h1>
 		<div class="liste-group">
-			<a href="../Categorie/categorie.html" class="list-group-item">Cat&eacutegorie 1</a>
-			<a href="../Categorie/categorie.html" class="list-group-item">Cat&eacutegorie 2</a>
-			<a href="../Categorie/categorie.html" class="list-group-item">Cat&eacutegorie 3</a>
-		</div>
+			<a href="#" class="list-group-item">Mon panier</a>
+			<a href="../Categorie/categorie.html" class="list-group-item">Cat&eacute;gorie 1</a>
+			<a href="../Categorie/categorie.html" class="list-group-item">Cat&eacute;gorie 2</a>
+			<a href="../Categorie/categorie.html" class="list-group-item">Cat&eacute;gorie 3</a>
+	</div>
+		<form>
+			<div class="form-group">
+				<input type="search" id="recherche" class="ui-widget" placeholder="Recherche">
+				<button type="submit" class="btn btn-sm"><span class="glyphicon glyphicon-eye-open"></span>></button>
+			</div>
+		</form>
 	</div>
 	<div class="col-md-9">
-		<h4 id="best">Nos produits les plus achet&eacutes :</h4>
+		<h4 id="best">Nos produits les plus achet&eacute;s :</h4>
 		<div class="row">
 			<div class="col-md-4">
 				<div class="card h-100">
-					<a href="../Produits/produit.html"><img class="card-img-top" src="../produit.png" alt></a>
+					<a href="#"><img class="card-img-top" src="{{asset('img/produit.png') }}" alt></a>
 					<div class="card-body">
-						<h4 class="card-title"><a href="../Produits/produit.html">Produit 1</a></h4>
+						<h4 class="card-title"><a href="#">Produit 1</a></h4>
 						<h5>
 							Prix
 						</h5>
@@ -38,9 +50,9 @@
 			</div>
 			<div class="col-md-4">
 				<div class="card h-100">
-					<a href="../Produits/produit.html"><img class="card-img-top" src="../produit.png" alt></a>
+					<a href="#"><img class="card-img-top" src="{{asset('img/produit.png') }}" alt></a>
 					<div class="card-body">
-						<h4 class="card-title"><a href="../Produits/produit.html">Produit 2</a></h4>
+						<h4 class="card-title"><a href="#">Produit 2</a></h4>
 						<h5>
 							Prix
 						</h5>
@@ -52,9 +64,9 @@
 			</div>
 			<div class="col-md-4">
 				<div class="card h-100">
-					<a href="../Produits/produit.html"><img class="card-img-top" src="../produit.png" alt></a>
+					<a href="#"><img class="card-img-top" src="{{asset('img/produit.png') }}" alt></a>
 					<div class="card-body">
-						<h4 class="card-title"><a href="../Produits/produit.html">Produit 3</a></h4>
+						<h4 class="card-title"><a href="#">Produit 3</a></h4>
 						<h5>
 							Prix
 						</h5>
@@ -72,9 +84,9 @@
 		<div class="row">
 			<div class="col-md-4">
 				<div class="card h-100">
-					<a href="../Produits/produit.html"><img class="card-img-top" src="../produit.png" alt></a>
+					<a href="#"><img class="card-img-top" src="{{asset('img/produit.png') }}" alt></a>
 					<div class="card-body">
-						<h4 class="card-title"><a href="../Produits/produit.html">Produit 1</a></h4>
+						<h4 class="card-title"><a href="#">Produit 1</a></h4>
 						<h5>
 							Prix
 						</h5>
@@ -86,9 +98,9 @@
 			</div>
 			<div class="col-md-4">
 				<div class="card h-100">
-					<a href="../Produits/produit.html"><img class="card-img-top" src="../produit.png" alt></a>
+					<a href="#"><img class="card-img-top" src="{{asset('img/produit.png') }}" alt></a>
 					<div class="card-body">
-						<h4 class="card-title"><a href="../Produits/produit.html">Produit 2</a></h4>
+						<h4 class="card-title"><a href="#">Produit 2</a></h4>
 						<h5>
 							Prix
 						</h5>
@@ -100,9 +112,9 @@
 			</div>
 			<div class="col-md-4">
 				<div class="card h-100">
-					<a href="../Produits/produit.html"><img class="card-img-top" src="../produit.png" alt></a>
+					<a href="#"><img class="card-img-top" src="{{asset('img/produit.png') }}" alt></a>
 					<div class="card-body">
-						<h4 class="card-title"><a href="../Produits/produit.html">Produit 3</a></h4>
+						<h4 class="card-title"><a href="#">Produit 3</a></h4>
 						<h5>
 							Prix
 						</h5>
@@ -114,9 +126,9 @@
 			</div>
 			<div class="col-md-4">
 				<div class="card h-100">
-					<a href="../Produits/produit.html"><img class="card-img-top" src="../produit.png" alt></a>
+					<a href="#"><img class="card-img-top" src="{{asset('img/produit.png') }}" alt></a>
 					<div class="card-body">
-						<h4 class="card-title"><a href="../Produits/produit.html">Produit 4</a></h4>
+						<h4 class="card-title"><a href="#">Produit 4</a></h4>
 						<h5>
 							Prix
 						</h5>
@@ -129,4 +141,27 @@
 		</div>
 	</div>
 </div>
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+  $( function() {
+    var availableRecherche = [
+      "T-shirt",
+      "Pantalon",
+      "Goddies",
+      "Porte clés",
+      "BDE",
+      "Cesi",
+      "Boissons",
+      "Contact",
+      "Produit",
+      "Nourriture"
+    ];
+    $( "#recherche" ).autocomplete({
+      source: availableRecherche
+    });
+  } );
+  </script>
 {% endblock %}
