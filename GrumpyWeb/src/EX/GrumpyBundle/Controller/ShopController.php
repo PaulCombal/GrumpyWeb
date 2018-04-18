@@ -81,22 +81,20 @@ class ShopController extends Controller
 
 		$produit = new Produit();
 		$form = $this->createForm(ProduitType::class, $produit);
-
-
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()) {
 
-				$entityManager = $this->getDoctrine()->getManager();
-				$entityManager->persist($produit);
-				$entityManager->flush();
+			$entityManager = $this->getDoctrine()->getManager();
+			$entityManager->persist($produit);
+			$entityManager->flush();
 
-				return $this->redirectToRoute('ex_grumpy_add_product');
+			return $this->redirectToRoute('ex_grumpy_add_product');
 		}
 
 		return $this->render(
 				'@EXGrumpy/Forum/add_product.html.twig',
-				array('form' => $form->createView())
+				['form' => $form->createView()]
 		);
 	}
 
@@ -110,22 +108,20 @@ class ShopController extends Controller
 
 		$commande = new Commande();
 		$form = $this->createForm(CommandeType::class, $commande);
-
-
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()) {
 
-					$entityManager = $this->getDoctrine()->getManager();
-					$entityManager->persist($commande);
-					$entityManager->flush();
+			$entityManager = $this->getDoctrine()->getManager();
+			$entityManager->persist($commande);
+			$entityManager->flush();
 
-					return $this->redirectToRoute('ex_grumpy_add_commande');
+			return $this->redirectToRoute('ex_grumpy_add_commande');
 		}
 
 		return $this->render(
-				'@EXGrumpy/Forum/add_commande.html.twig',
-				array('form' => $form->createView())
+			'@EXGrumpy/Forum/add_commande.html.twig',
+			['form' => $form->createView()]
 		);
 	}
 }

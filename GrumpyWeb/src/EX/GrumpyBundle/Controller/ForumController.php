@@ -30,7 +30,6 @@ class ForumController extends Controller
 		if(TRUE ===$this->get('security.authorization_checker')->isGranted('ROLE_CONFIRM_IDEAS') )
 			$test = "Je peux modifier les idees";
 
-		// Mais pour l'instant, on ne fait qu'appeler le template
 		return $this->render("@EXGrumpy/Forum/index.html.twig");
 	}
 }

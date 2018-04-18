@@ -66,7 +66,7 @@ class Evenement
     /**
      * @var string|null
      *
-     * @ORM\Column(name="chemin_image", type="string", length=25, nullable=true)
+     * @ORM\Column(name="chemin_image", type="string", length=250, nullable=true)
      */
     private $cheminImage;
 

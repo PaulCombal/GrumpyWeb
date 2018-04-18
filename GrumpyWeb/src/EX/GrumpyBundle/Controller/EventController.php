@@ -134,7 +134,7 @@ class EventController extends Controller
 				"repetition" => "Tous les " . $event->getRepetition() . " jours",
 				"description" => $event->getDescription(),
 				"statut" => $event->getStatut(),
-				"chemin_image" => "http://via.placeholder.com/350x150"
+				"chemin_image" => $event->getCheminImage()
 			];
 		}
 
@@ -171,7 +171,7 @@ class EventController extends Controller
 				"repetition" => "Tous les " . $event->getRepetition() . " jours",
 				"description" => $event->getDescription(),
 				"statut" => $event->getStatut(),
-				"chemin_image" => "http://via.placeholder.com/350x150"
+				"chemin_image" => $event->getCheminImage()
 			];
 		}
 
