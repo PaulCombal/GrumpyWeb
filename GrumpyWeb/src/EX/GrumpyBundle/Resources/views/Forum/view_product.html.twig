@@ -10,26 +10,19 @@
 	{{parent()}}
 	<link href="{{ asset('css/produit.css') }}" rel="stylesheet">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  	<link rel="stylesheet" href="/resources/demos/style.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
  {% endblock %}
 
 {% block ocplatform_body %}
 
 <div class="row">
 	<div class="col-md-3">
-		<h1 id="hautdepage" class="titre">La Boutique</h1>
-		<div class="liste-group">
-			<a href="#" class="list-group-item">Mon panier</a>
-			<a href="../Categorie/categorie.html" class="list-group-item">Cat&eacute;gorie 1</a>
-			<a href="../Categorie/categorie.html" class="list-group-item">Cat&eacute;gorie 2</a>
-			<a href="../Categorie/categorie.html" class="list-group-item">Cat&eacute;gorie 3</a>
-		</div>
-		<form>
-			<div class="form-group">
-				<input type="search" id="recherche" class="form-control ui-widget" placeholder="Recherche">
-			</div>
-		</form>
-	</div>
+    <h1 class="titre">La Boutique</h1>
+    <div class="liste-group">
+      <a href="#" class="list-group-item active"><i class="fas fa-shopping-basket"></i> Mon panier</a>
+      <a href="{{ path('ex_grumpy_view_products') }}" class="list-group-item"><i class="fas fa-arrow-alt-circle-left"></i> Retour à la boutique</a>
+    </div>
+  </div>
 	<div class="col-md-9">
 		<div class="card mt-4">
 			<img class="image" alt="product" src="{{asset('img/produit.png') }}" />
@@ -42,27 +35,4 @@
   		</div>
 	</div>
 </div>
-{% endblock %}
-{% block javascripts %}
-{{ parent() }}
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-  $( function() {
-    var availableRecherche = [
-      "T-shirt",
-      "Pantalon",
-      "Goddies",
-      "Porte clés",
-      "BDE",
-      "Cesi",
-      "Boissons",
-      "Contact",
-      "Produit",
-      "Nourriture"
-    ];
-    $( "#recherche" ).autocomplete({
-      source: availableRecherche
-    });
-  } );
-  </script>
 {% endblock %}

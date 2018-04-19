@@ -1,7 +1,23 @@
-{{ form_start(form) }}
-    {{ form_row(form.nom) }}
-    {{ form_row(form.description) }}
-    {{ form_row(form.categorie) }}
-    {{ form_row(form.prix) }}
-    <button type="submit">Publier Le Produit</button>
-{{ form_end(form) }}
+{% extends "@EXGrumpy/layout.html.twig" %}
+
+{% block title %}
+	Proposition événement - {{ parent() }}
+{% endblock %}
+
+{% block ocplatform_body %}
+
+<div class="row">
+	<div class="col-md-3"></div>
+	<div class="col-md-6">
+		<br />
+		{{ form_start(form) }}
+	    {{ form_row(form.nom, {'attr':{'class':'form-control', 'placeholder':'T-shirt'}})}}
+	    {{ form_row(form.description, {'attr':{'class':'form-control', 'placeholder':'sympathique t-shirt avec le logo du BDE'}})}}
+	    {{ form_row(form.categorie, {'attr':{'class':'form-control'}})}}
+	    {{ form_row(form.prix, {'attr':{'class':'form-control', 'placeholder':'0'}})}}
+	    <br />
+	    <button class="btn btn-primary float-right" type="submit">Publier Le Produit</button>
+		{{ form_end(form) }}
+	</div>
+</div>
+{% endblock %}
