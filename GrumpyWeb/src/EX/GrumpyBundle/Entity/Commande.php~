@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Commande
  *
- * @ORM\Table(name="commande", indexes={@ORM\Index(name="FK_commande_id_produit", columns={"id_produit"}), @ORM\Index(name="FK_commande_id_panier", columns={"id_panier"})})
+ * @ORM\Table(name="commande", indexes={@ORM\Index(name="FK_commande_id_produit", columns={"id_produit"}), @ORM\Index(name="FK_commande_id_utilisateur", columns={"id_utilisateur"})})
  * @ORM\Entity
  */
 class Commande
@@ -22,14 +22,14 @@ class Commande
     private $id;
 
     /**
-     * @var \Panier
+     * @var \Utilisateur
      *
-     * @ORM\ManyToOne(targetEntity="Panier")
+     * @ORM\ManyToOne(targetEntity="Utilisateur")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_panier", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_utilisateur", referencedColumnName="id")
      * })
      */
-    private $idPanier;
+    private $idUtilisateur;
 
     /**
      * @var \Produit
@@ -63,27 +63,27 @@ class Commande
     }
 
     /**
-     * Set idPanier.
+     * Set idUtilisateur.
      *
-     * @param \EX\GrumpyBundle\Entity\Panier|null $idPanier
+     * @param \EX\GrumpyBundle\Entity\Utilisateur|null $idUtilisateur
      *
      * @return Commande
      */
-    public function setIdPanier(\EX\GrumpyBundle\Entity\Panier $idPanier = null)
+    public function setIdUtilisateur(\EX\GrumpyBundle\Entity\Utilisateur $idUtilisateur = null)
     {
-        $this->idPanier = $idPanier;
+        $this->idUtilisateur = $idUtilisateur;
 
         return $this;
     }
 
     /**
-     * Get idPanier.
+     * Get idUtilisateur.
      *
-     * @return \EX\GrumpyBundle\Entity\Panier|null
+     * @return \EX\GrumpyBundle\Entity\Utilisateur|null
      */
-    public function getIdPanier()
+    public function getIdUtilisateur()
     {
-        return $this->idPanier;
+        return $this->idUtilisateur;
     }
 
     /**

@@ -63,12 +63,14 @@ class ShopController extends Controller
 			->find($product_id);
 
 		$product = 
-		[
+		[	
 			"name" => $product->getNom(),
 			"price" => $product->getPrix() . '€',
 			"description" => $product->getDescription(),
 			"category" => $product->getCategorie(),
-			"chemin_image" => "http://via.placeholder.com/350x150"
+			"chemin_image" => "http://via.placeholder.com/350x150",
+			"iconv(in_charset, out_charset, str)d" => $product_id,
+			"id" => $product_id
 		];
 
 		return $this->render('@EXGrumpy/Forum/view_product.html.twig', $product);
@@ -195,7 +197,7 @@ class ShopController extends Controller
 			return $this->redirectToRoute('fos_user_security_login');
 		}
 
-		$produit = new Produit();
+		$produits = [];
 
 		$paniers = $this->getDoctrine()
 			->getRepository(Panier::class)
@@ -203,17 +205,26 @@ class ShopController extends Controller
 			(
 				[ 'idUtilisateur' => $user],
 				null,
-				50,
+				50	,
 				0
 			);
-
 /*
-		foreach ($panier as $item) {
+		foreach ($paniers as $item) {
+			$produits[] =  $this->getDoctrine()->getRepository(Produit::class)
+			->findBy([ 'id' => $item],
+				null,
+				1	,
+				0);
+		}
+
+		foreach ($paniers as $item) {
 			$commande = new Commande();
 			$commande->setStatutCommande("en cours");
-			$commande->setIdPanier($item->getId());
-			$commande->setIdProduit($item->getIdProduit());
-		
+			$commande->setIdUtilisateur($user);
+			$commande->setIdProduit($produits);
+			$entityManager = $this->getDoctrine()->getManager();
+			$entityManager->merge($commande);
+			$entityManager->flush();
 		}
 */
 		$entityManager = $this->getDoctrine()->getManager();

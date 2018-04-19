@@ -30,7 +30,7 @@
   				<h2>{{ name }}</h2>
   				<h5>Prix : {{ price }}</h5>
   				<p>{{ description }}</p>
-  				<button type="submit" class="btn btn-primary btn-lg float-right"> Acheter</button>
+  				<a href="{{ path('ex_grumpy_add_to_panier', {'product_id': id}) }}" class="btn btn-primary active">Ajouter au Panier</a>
   			</div>
   		</div>
 	</div>
