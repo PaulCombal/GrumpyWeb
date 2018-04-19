@@ -37,4 +37,8 @@ class ForumController extends Controller
 		return $this->render("@EXGrumpy/Forum/legal.html.twig");
 	}
 
+	public function test_apiAction() {
+		return $this->render("@EXGrumpy/Forum/test_shop_api_ajax.html");
+	}
+
 }

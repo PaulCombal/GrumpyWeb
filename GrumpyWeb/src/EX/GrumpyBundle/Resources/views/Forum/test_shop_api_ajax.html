@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+	<title>Test API BDE</title>
+</head>
+<body>
+	<a href="javascript:start_api()"> Tester l'API Ajax </a>
+	<div id="result_div"></div>
+	<br />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+	<script>
+		
+	function start_api() {
+		$.get("http://localhost:8000/view_products/json", (data) => {
+			json = JSON.parse(data);
+			view = $("#result_div");
+			$(json).each(function(i, e){
+				console.log(e);
+				view.append(`
+					<h3> ` + e.name + ` </h3>
+					<div> Description: ` + e.description +`</div>
+					<div> Catégorie: ` + e.category + ` </div>
+					<div> Prix: ` + e.price + `</div>
+					<br />
+				`);
+			});
+		});
+	}
+
+	</script>
+</body>
+</html>
