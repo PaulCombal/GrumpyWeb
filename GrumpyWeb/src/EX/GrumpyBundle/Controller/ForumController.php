@@ -26,10 +26,6 @@ class ForumController extends Controller
 	
 	public function indexAction()
 	{
-		$test = "Je n'ai pas le pouvoir de confirmer les idees";
-		if(TRUE ===$this->get('security.authorization_checker')->isGranted('ROLE_CONFIRM_IDEAS') )
-			$test = "Je peux modifier les idees";
-
 		return $this->render("@EXGrumpy/Forum/index.html.twig");
 	}
 

@@ -87,6 +87,14 @@ class ShopController extends Controller
 
 	public function add_productAction(Request $request)
 	{
+		$user = $this->getUser();
+		if ($user == null) {
+			return $this->redirectToRoute('fos_user_security_login');
+		}
+
+		if (!$user->hasGroup('Membre BDE')) {
+			return $this->redirectToRoute('fos_user_security_login');
+		}
 
 		$produit = new Produit();
 		$form = $this->createForm(ProduitType::class, $produit);

@@ -12,6 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Groupe
 {
+
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
+    
     /**
      * @var int
      *

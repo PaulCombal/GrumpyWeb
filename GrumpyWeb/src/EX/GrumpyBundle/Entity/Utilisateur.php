@@ -46,6 +46,14 @@ class Utilisateur extends BaseUser
      */
     protected $idPanier;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="EX\GrumpyBundle\Entity\Groupe")
+     * @ORM\JoinTable(name="user_groupe",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
+     * )
+     */
+    protected $groups;
 
     /**
      * Set nom.
