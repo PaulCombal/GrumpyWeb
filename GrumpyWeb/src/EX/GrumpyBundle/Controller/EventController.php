@@ -349,7 +349,31 @@ class EventController extends Controller
 		return $this->redirectToRoute('ex_grumpy_view_event', ['event_id' => $event_id]);
 	}
 
-	public function vote_ideaAction()
+	public function validate_eventAction($event_id) {
+		$user = $this->getUser();
+		if ($user == null) {
+			return $this->redirectToRoute('fos_user_security_login');
+		}
+
+		if (!$user->hasGroup('Membre BDE')) {
+			return $this->redirectToRoute('fos_user_security_login');
+		}
+
+		$event = $this->getDoctrine()
+			->getRepository(Evenement::class)
+			->find($event_id);
+
+		$event->setStatut("officiel");
+
+		$entityManager = $this->getDoctrine()->getManager();
+		$entityManager->persist($event);
+		$entityManager->flush();
+
+
+		return $this->redirectToRoute('ex_grumpy_view_event', ['event_id' => $event_id]);
+	}
+
+	/*public function vote_ideaAction()
 	{
 		$user = $this->getUser();
 		if ($user == null) {
@@ -384,5 +408,5 @@ class EventController extends Controller
 		unset($events);
 
 		return $this->render('@EXGrumpy/Forum/view_idee.html.twig', ['events' => $temp]);
-	}
+	}*/
 }

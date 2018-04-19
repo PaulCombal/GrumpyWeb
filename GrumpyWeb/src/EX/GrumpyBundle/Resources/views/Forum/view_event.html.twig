@@ -107,7 +107,10 @@
   <h3 class="my-4 col-md-12">
     Membre BDE
   </h3>
-  <a class="btn btn-primary" href="{{ path('ex_grumpy_get_users_event', {'event_id': event_id }) }}"><i class="fas fa-arrow-alt-circle-down"></i> Télécharger la liste des membres inscrits en CSV</a>
+  <div>
+    <a class="btn btn-primary" href="{{ path('ex_grumpy_get_users_event', {'event_id': event_id }) }}"><i class="fas fa-arrow-alt-circle-down"></i> Télécharger la liste des membres inscrits en CSV</a>
+    <a class="btn btn-primary" href="{{ path('ex_grumpy_validate_event', {'event_id': event_id }) }}"><i class="fas fa-check"></i> Rendre cet event officiel</a>
+  </div>
 </div>
 {% endif %}
 
