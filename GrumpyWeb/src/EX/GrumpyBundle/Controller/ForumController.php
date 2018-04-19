@@ -13,6 +13,7 @@ use EX\GrumpyBundle\Entity\Evenement;
 use EX\GrumpyBundle\Entity\Produit;
 use EX\GrumpyBundle\Entity\Commentaire;
 use EX\GrumpyBundle\Entity\Commande;
+use EX\GrumpyBundle\Entity\Utilisateur;
 use EX\GrumpyBundle\Form\CommentaireType;
 use EX\GrumpyBundle\Entity\Inscription;
 use EX\GrumpyBundle\Form\EvenementType;
@@ -35,6 +36,51 @@ class ForumController extends Controller
 
 	public function test_apiAction() {
 		return $this->render("@EXGrumpy/Forum/test_shop_api_ajax.html");
+	}
+
+	public function get_usersAction() {
+		function array2csv(array &$array)
+		{
+		   if (count($array) == 0) {
+		     return null;
+		   }
+		   ob_start();
+		   $df = fopen("php://output", 'w');
+		   fputcsv($df, array_keys(reset($array)));
+		   foreach ($array as $row) {
+		      fputcsv($df, $row);
+		   }
+		   fclose($df);
+		   return ob_get_clean();
+		}
+
+		$user = $this->getUser();
+		if ($user == null) {
+			return $this->redirectToRoute('fos_user_security_login');
+		}
+
+		if (!$user->hasGroup('Membre BDE')) {
+			return $this->redirectToRoute('fos_user_security_login');
+		}
+
+		$users = $this->getDoctrine()
+			->getRepository(Utilisateur::class)
+			->findAll();
+
+		$temp = [];
+		foreach ($users as &$user) {
+			$temp[] = 
+			[
+				"prenom" => $user->getPrenom(),
+				"nom" => $user->getNom(),
+				"email" => $user->getEmail(),
+				"pseudo" => $user->getId()
+			];
+		}
+
+		header("Content-Type: text/plain");
+		header("Content-disposition: attachment; filename=users_bde.csv");
+		return new Response(array2csv($temp));
 	}
 
 }

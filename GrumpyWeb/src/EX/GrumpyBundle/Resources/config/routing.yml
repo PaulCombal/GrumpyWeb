@@ -84,3 +84,7 @@ ex_grumpy_legal:
 ex_grumpy_test_api:
     path:    /test_api
     defaults: { _controller: EXGrumpyBundle:Forum:test_api }
+
+ex_grumpy_get_users:
+    path:    /get_users
+    defaults: { _controller: EXGrumpyBundle:Forum:get_users }
