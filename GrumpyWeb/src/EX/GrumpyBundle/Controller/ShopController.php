@@ -20,7 +20,7 @@ class ShopController extends Controller
 
 
 
-	public function view_productsAction(Request $request) {
+	public function view_productsAction(Request $request, $format = "") {
 		$user = $this->getUser();
 		if ($user == null) {
 			return $this->redirectToRoute('fos_user_security_login');
@@ -45,7 +45,12 @@ class ShopController extends Controller
 
 		unset($products);
 
-		return $this->render('@EXGrumpy/Forum/view_products.html.twig', ['products' => $temp]);
+		if ($format === "json") {
+			return new Response(json_encode($temp));
+		}
+		else {
+			return $this->render('@EXGrumpy/Forum/view_products.html.twig', ['products' => $temp]);
+		}
 	}
 
 

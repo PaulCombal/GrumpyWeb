@@ -1,8 +1,11 @@
-
 .image
 {
 	max-width: 50%;
 	height: auto;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.btn.btn-primary {
+    margin: auto auto 7px 10px;
 }
