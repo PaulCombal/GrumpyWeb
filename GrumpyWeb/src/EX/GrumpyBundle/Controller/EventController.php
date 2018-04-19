@@ -349,7 +349,7 @@ class EventController extends Controller
 		return $this->redirectToRoute('ex_grumpy_view_event', ['event_id' => $event_id]);
 	}
 
-	public function validate_eventAction($event_id) {
+	public function validate_eventAction($action, $event_id) {
 		$user = $this->getUser();
 		if ($user == null) {
 			return $this->redirectToRoute('fos_user_security_login');
@@ -363,7 +363,12 @@ class EventController extends Controller
 			->getRepository(Evenement::class)
 			->find($event_id);
 
-		$event->setStatut("officiel");
+		if ($action == 'validate') {
+			$event->setStatut("officiel");
+		}
+		else {
+			$event->setStatut("idée");
+		}
 
 		$entityManager = $this->getDoctrine()->getManager();
 		$entityManager->persist($event);

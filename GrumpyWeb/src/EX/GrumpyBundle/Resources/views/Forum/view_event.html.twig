@@ -109,7 +109,11 @@
   </h3>
   <div>
     <a class="btn btn-primary" href="{{ path('ex_grumpy_get_users_event', {'event_id': event_id }) }}"><i class="fas fa-arrow-alt-circle-down"></i> Télécharger la liste des membres inscrits en CSV</a>
-    <a class="btn btn-primary" href="{{ path('ex_grumpy_validate_event', {'event_id': event_id }) }}"><i class="fas fa-check"></i> Rendre cet event officiel</a>
+    {% if statut == "idée" %}
+      <a class="btn btn-primary" href="{{ path('ex_grumpy_validate_event', {'event_id': event_id, 'action': 'validate' }) }}"><i class="fas fa-check"></i> Rendre cet event officiel</a>
+    {% else %}
+      <a class="btn btn-primary" href="{{ path('ex_grumpy_validate_event', {'event_id': event_id, 'action': 'devalidate' }) }}"><i class="fas fa-minus-circle"></i> Rendre cet event non-officiel</a>
+    {% endif %}
   </div>
 </div>
 {% endif %}

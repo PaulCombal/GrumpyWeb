@@ -96,7 +96,8 @@ ex_grumpy_get_users_event:
         event_id: '\d+'
 
 ex_grumpy_validate_event:
-    path:    /validate_event/{event_id}
+    path:    /validate_event/{action}/{event_id}
     defaults: { _controller: EXGrumpyBundle:Event:validate_event }
     requirements:
         event_id: '\d+'
+        action: 'validate|devalidate'
