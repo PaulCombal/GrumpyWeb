@@ -264,7 +264,9 @@ class EventController extends Controller
 			"is_subscribed" => sizeof($isSubscribedAlready) > 0,
 			"is_liked" => sizeof($isLikedAlready) > 0,
 			"like_count" => sizeof($isLikedAlready),
-			"commentaires" => $temp
+			"commentaires" => $temp,
+			"is_bde" => $user->hasGroup('Membre BDE'),
+			"is_cesi" => $user->hasGroup('Membre CESI')
 		];
 
 

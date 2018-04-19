@@ -6,6 +6,11 @@
   Évènements - {{ parent() }}
 {% endblock %}
 
+ {% block stylesheets %}
+  {{parent()}}
+  <link href="{{ asset('css/idee.css') }}" rel="stylesheet">
+ {% endblock %}
+
 {% block ocplatform_body %}
 
 <!-- Page Heading -->

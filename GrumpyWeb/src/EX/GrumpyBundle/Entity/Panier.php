@@ -12,6 +12,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Panier
 {
+
+    public function __toString()
+    {
+        return (string)$this->getId();
+    }
+
     /**
      * @var int
      *

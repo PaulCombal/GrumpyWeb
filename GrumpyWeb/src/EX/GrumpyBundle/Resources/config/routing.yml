@@ -88,3 +88,9 @@ ex_grumpy_test_api:
 ex_grumpy_get_users:
     path:    /get_users
     defaults: { _controller: EXGrumpyBundle:Forum:get_users }
+
+ex_grumpy_get_users_event:
+    path:    /get_users/{event_id}
+    defaults: { _controller: EXGrumpyBundle:Forum:get_users }
+    requirements:
+        event_id: '\d+'

@@ -82,6 +82,12 @@
 <div class="row">
   <h3 class="my-4 col-md-12"> Commentaires et photos: </h3>
 
+  {% if commentaires|length == 0 %}
+    <div class="col-md-12">
+      Deviens le premier à commenter cet event!
+    </div>
+  {% endif %}
+
   {% for commentaire in commentaires %}
     <div class="col-md-12">
       {{commentaire.poster_name}}: 
@@ -95,4 +101,23 @@
     </div>
   {% endfor %}
 </div>
+
+{% if is_bde == true %}
+<div class="row">
+  <h3 class="my-4 col-md-12">
+    Membre BDE
+  </h3>
+  <a class="btn btn-primary" href="{{ path('ex_grumpy_get_users_event', {'event_id': event_id }) }}"><i class="fas fa-arrow-alt-circle-down"></i> Télécharger la liste des membres inscrits en CSV</a>
+</div>
+{% endif %}
+
+{% if is_cesi == true %}
+<div class="row">
+  <h3 class="my-4 col-md-12">
+    Membre du CESI
+  </h3>
+  <a class="btn btn-primary" href="javascript:void(0)"><i class="fas fa-ban"></i> Supprimer cet évènement</a>
+</div>
+{% endif %}
+
 {% endblock %}

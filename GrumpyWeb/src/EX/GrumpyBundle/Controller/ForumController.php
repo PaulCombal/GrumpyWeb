@@ -38,7 +38,7 @@ class ForumController extends Controller
 		return $this->render("@EXGrumpy/Forum/test_shop_api_ajax.html");
 	}
 
-	public function get_usersAction() {
+	public function get_usersAction($event_id = '') {
 		function array2csv(array &$array)
 		{
 		   if (count($array) == 0) {
@@ -63,9 +63,28 @@ class ForumController extends Controller
 			return $this->redirectToRoute('fos_user_security_login');
 		}
 
-		$users = $this->getDoctrine()
-			->getRepository(Utilisateur::class)
-			->findAll();
+		$users = [];
+
+		if (!empty($event_id)) {
+			$subs = $this->getDoctrine()
+				->getRepository(Inscription::class)
+				->findBy(
+					['idEvenement' => $event_id],
+					null,
+					5000,
+					0
+				);
+
+			foreach ($subs as &$sub) {
+				$users[] = $sub->getIdUtilisateur();
+			}
+		}
+		else {
+			// All users
+			$users = $this->getDoctrine()
+				->getRepository(Utilisateur::class)
+				->findAll();
+		}
 
 		$temp = [];
 		foreach ($users as &$user) {
@@ -76,6 +95,10 @@ class ForumController extends Controller
 				"email" => $user->getEmail(),
 				"pseudo" => $user->getId()
 			];
+		}
+
+		if (sizeof($users) == 0) {
+			return new Response("Aucun utilisateur n'est inscrit :(");
 		}
 
 		header("Content-Type: text/plain");
