@@ -58,18 +58,18 @@
     Réagir
   </h3>
   <div>
-    <a class="btn btn-primary" href="{{ path('ex_grumpy_add_comment', {'event_id': event_id, 'cat_comment': 'image' }) }}">Ajoute ta photo</a>
-    <a class="btn btn-primary" href="{{ path('ex_grumpy_add_comment', {'event_id': event_id, 'cat_comment': 'commentaire' }) }}">Commente l'évènement</a>
+    <a class="btn btn-primary" href="{{ path('ex_grumpy_add_comment', {'event_id': event_id, 'cat_comment': 'image' }) }}"><i class="fas fa-arrow-alt-circle-up"></i> Ajoute ta photo</a>
+    <a class="btn btn-primary" href="{{ path('ex_grumpy_add_comment', {'event_id': event_id, 'cat_comment': 'commentaire' }) }}"><i class="fas fa-pencil-alt"></i> Commente l'évènement</a>
     {% if is_liked == true %}
-      <a class="btn btn-primary" href="#">Vous aimez cet évènement  <span class="badge badge-light">{{ like_count }}</span></a>
+      <a class="btn btn-primary" href="#"><i class="fas fa-thumbs-up"></i> Vous aimez cet évènement  <span class="badge badge-light">{{ like_count }}</span></a>
     {% else %}
-      <a class="btn btn-primary" href="{{ path('ex_grumpy_like', {'event_id': event_id}) }}">Like  <span class="badge badge-light">{{ like_count }}</span></a>
+      <a class="btn btn-primary" href="{{ path('ex_grumpy_like', {'event_id': event_id}) }}"><i class="fas fa-thumbs-up"></i> Like  <span class="badge badge-light">{{ like_count }}</span></a>
     {% endif %}
 
     {% if is_subscribed == true %}
-      <a class="btn btn-primary" href="#">Vous êtes inscrit!</a>
+      <a class="btn btn-primary" href="#"><i class="fas fa-check-circle"></i> Vous êtes inscrit!</a>
     {% else %}
-      <a class="btn btn-primary" href="{{ path('ex_grumpy_subscribe', {'event_id': event_id}) }}">S'inscrire à l'évènement</a>
+      <a class="btn btn-primary" href="{{ path('ex_grumpy_subscribe', {'event_id': event_id}) }}"><i class="fas fa-flag-checkered"></i> S'inscrire à l'évènement</a>
     {% endif %}
   </div>
 </div>
