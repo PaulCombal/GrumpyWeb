@@ -52,7 +52,7 @@ class Evenement
     /**
      * @var string|null
      *
-     * @ORM\Column(name="description", type="string", length=25, nullable=true)
+     * @ORM\Column(name="description", type="string", length=2500, nullable=true)
      */
     private $description;
 

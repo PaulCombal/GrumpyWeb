@@ -263,7 +263,7 @@ class EventController extends Controller
 			"event_id" => $event_id,
 			"is_subscribed" => sizeof($isSubscribedAlready) > 0,
 			"is_liked" => sizeof($isLikedAlready) > 0,
-			"like_count" => sizeof($isLikedAlready),
+			"like_count" => sizeof($numlikes),
 			"commentaires" => $temp,
 			"is_bde" => $user->hasGroup('Membre BDE'),
 			"is_cesi" => $user->hasGroup('Membre CESI')
@@ -378,40 +378,4 @@ class EventController extends Controller
 		return $this->redirectToRoute('ex_grumpy_view_event', ['event_id' => $event_id]);
 	}
 
-	/*public function vote_ideaAction()
-	{
-		$user = $this->getUser();
-		if ($user == null) {
-			return $this->redirectToRoute('fos_user_security_login');
-		}
-
-		$events = $this->getDoctrine()
-			->getRepository(Evenement::class)
-			->findBy
-			(
-				[ 'statut' => 'idée' ],
-				null,
-				10,
-				0
-			);
-
-		$temp = [];
-		foreach ($events as &$event) {
-			$temp[] = 
-			[
-				"title" => $event->getNom(), 
-				"price" => $event->getPrix(), 
-				"start_date" => $event->getDateDebut(), 
-				"repetition" => "Tous les " . $event->getRepetition() . " jours",
-				"description" => $event->getDescription(),
-				"statut" => $event->getStatut(),
-				"chemin_image" => $event->getCheminImage(),
-				"id" => $event->getId()
-			];
-		}
-
-		unset($events);
-
-		return $this->render('@EXGrumpy/Forum/view_idee.html.twig', ['events' => $temp]);
-	}*/
 }

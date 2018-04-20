@@ -96,6 +96,8 @@
         <br />
       {% elseif commentaire.type == 'commentaire' %}
         {{commentaire.contenu}}
+      {% elseif commentaire.type == 'like' %}
+        Aime cet évènement
       {% endif %}
       <br />
     </div>
